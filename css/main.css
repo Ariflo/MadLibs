@@ -1,0 +1,14 @@
+.header{
+	height:20%; 
+	width: 50%;
+	margin-left: 300px; 
+	position: center;
+}
+
+.btn {
+	margin-left: 560px; 
+}
+
+label{
+	text-align: center; 
+}
