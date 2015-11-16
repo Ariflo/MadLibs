@@ -1,6 +1,17 @@
 var storyObj = {};
 
-function fillInTheBlanks() {
+
+window.onload = function(){
+
+//push words to story
+wordPusher(); 
+
+//fill in blanks of story  
+fillInTheBlanks ();
+
+};
+
+function wordPusher() {
 
    var queryString = document.location.search.replace('?', '');
     var pairs = queryString.split('&').map(function (pair) {
@@ -14,5 +25,10 @@ function fillInTheBlanks() {
                                  storyObj[pair[0]] = pair[1];
                          });
             });
+};
 
-}
+function fillInTheBlanks () {
+
+   $("#blank").append(storyObj.word);
+
+};
