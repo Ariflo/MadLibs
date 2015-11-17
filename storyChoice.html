@@ -14,24 +14,31 @@
 	<div class="container">
 		<img class= "headerPic" src=" images/MadLibs-Logo.png">
 
-		<form class="form-horizontal"  action="wordChoice.html" method="get">
-			<div class= "form-group">
-				<center><label><h3>Choose Your Story</h3></label></center>
+		<form action="wordChoice.html" method="get">
+			<div>
+				<center><label><h3 class= "header">Choose Your Story</h3></label></center>
 				<fieldset> 
-					<fieldset> 
-						
-						<input class="form-control" type="image" name="image" src="/files/2917/fxlogo.png">
+					<fieldset id="StoryBox"> 
+						<legend class="text-center">My Eulogy</legend>
+						<input id="StoryIMG" class="img-rounded" type="image" name="eulogy" src="../Madlibs/images/eulogy.jpg">
 					</fieldset>
-					<fieldset> <input class="form-control" type="image" name="image" src="/files/2917/fxlogo.png"></fieldset>
-					<fieldset> <input class="form-control" type="image" name="image" src="/files/2917/fxlogo.png"></fieldset>
-					<fieldset> <input class="form-control" type="image" name="image" src="/files/2917/fxlogo.png"></fieldset>
+					<fieldset id="StoryBox"> 
+						<legend class="text-center">Talk Like a Pirate</legend>
+						<input id="StoryIMG"  class="img-rounded" type="image" name="pirate" src=" ../Madlibs/images/Pirates.jpg">
+					</fieldset>
+					<fieldset id="StoryBox"> 
+						<legend class="text-center">Land a Hot Date</legend>
+						<input id="StoryIMG"  class="img-rounded"type="image" name="date" src=" ../Madlibs/images/Dating.jpg">
+					</fieldset>
+					<fieldset id="StoryBox"> 
+						<legend class="text-center"> Your Own Adventure!</legend>
+						<input id="StoryIMG"  class="img-rounded" type="image" name="adventure" src=" ../Madlibs/images/ChooseYourOwn.PNG">
+					</fieldset>
 				</fieldset>
 			</div>		
-			<div class= "form-group">
-				<center><input class="btn btn-primary" type="submit" value="SUBMIT"></center>
-			</div>
 		</form>
 		
 	</div>
 </body>
+
 </html>

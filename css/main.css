@@ -7,7 +7,27 @@
 
 }
 
-.btn input {
+.header{
+	padding-bottom: 25px; 
+
+}
+
+#StoryBox{
+	display: block;
+	float: left; 
+	padding: 25px;
+	width: 25%; 
+}
+
+#StoryIMG{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	height: 400px; 
+	width: 250px;
+}
+
+input .btn{
 	margin-left: auto; 
 	margin-right: auto;
 	display: block;
