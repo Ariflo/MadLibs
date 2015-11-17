@@ -17,7 +17,7 @@ function wordPusher() {
     var pairs = queryString.split('&').map(function (pair) {
           return pair.split('=');
       })
-
+            if(pairs)
             pairs.forEach(function (pair) {
 
                       pair.forEach(function(){
@@ -29,6 +29,6 @@ function wordPusher() {
 
 function fillInTheBlanks () {
 
-   $("#blank").append(storyObj.word);
+    $("#blank").append(storyObj.word.replace("+", " "));
 
 };
