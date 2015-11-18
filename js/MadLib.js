@@ -1,6 +1,5 @@
 var storyObj = {};
 
-
 window.onload = function(){
 //push story selection to storySelect
 storyPusher(); 
@@ -8,20 +7,19 @@ storyPusher();
 //push words to story
 wordPusher(); 
 
-//fill in blanks of story  
-fillInTheBlanks();
-
 };
 
+//unpackage story selection 
 function storyPusher() {
 
   var queryString = document.location.search.replace('?', '');
   var choice = queryString.split('.')
+
+  choice[0];
   
-  getSelected(choice[0]);
 };
 
-
+//push words to storyObj 
 function wordPusher() {
 
    var queryString = document.location.search.replace('?', '');
@@ -38,8 +36,42 @@ function wordPusher() {
             });
 };
 
-function fillInTheBlanks () {
+//fill in blanks in story 
+function fillInTheBlanks (story) {
 
-    $("#blank").append(storyObj.word.replace("+", " "));
+      $("#blank").append(storyObj.word.replace("+", " "));   
 
 };
+
+function madLibStart(storyChoice) {
+    //number of words depends on which story the user chooses
+    var wordCount = 0; 
+    if(storyChoice === "eulogy"){
+
+      wordCount = 
+
+    }
+
+    //Once the user chooses a story they should be promted for word after word to enter into the story
+
+    var closureFunction = function() {
+
+        if(roundNumber < GLOBALS.NUMBER_OF_ROUNDS) {
+            // Create the story 
+            for(var i = 0; i < GLOBALS.MOLES_PER_ROUND; i++) {
+                new Mole(GLOBALS.MOLE_UP_MIN*1000, GLOBALS.MOLE_UP_MAX*1000);
+            }
+
+            // Next round, using our precious closed-over parameter 
+            initiateRound(roundNumber + 1);
+        }
+        else {
+            endGame();
+        }
+    };
+
+    // Set it and forget it.
+    setTimeout(closureFunction, GLOBALS.ROUND_COOLDOWN * 1000);
+}
+
+

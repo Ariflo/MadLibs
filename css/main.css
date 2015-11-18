@@ -24,7 +24,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	height: 400px; 
-	width: 250px;
+	width: 265px;
 }
 
 input .btn{
@@ -36,3 +36,9 @@ input .btn{
 label{
 	text-align: center; 
 }
+
+ p{
+	display: block;
+	padding-bottom: 10px;
+}
+
