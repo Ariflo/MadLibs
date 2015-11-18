@@ -2,14 +2,25 @@ var storyObj = {};
 
 
 window.onload = function(){
+//push story selection to storySelect
+storyPusher(); 
 
 //push words to story
 wordPusher(); 
 
 //fill in blanks of story  
-fillInTheBlanks ();
+fillInTheBlanks();
 
 };
+
+function storyPusher() {
+
+  var queryString = document.location.search.replace('?', '');
+  var choice = queryString.split('.')
+  
+  getSelected(choice[0]);
+};
+
 
 function wordPusher() {
 
