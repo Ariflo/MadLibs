@@ -1,5 +1,6 @@
 var storyWords = [];
-var wordCount = 0; 
+var wordCount = 0;
+var fadeCount = 0;  
 var word; 
 
 window.onload = function(){
@@ -7,23 +8,32 @@ window.onload = function(){
 //push story selection to storySelect
 storyPusher();
 
-$('#wordForm').on('click', function(evt){
+$('#wordForm').on('submit', function(evt){
   evt.preventDefault();
   var choosenStory = new Story ();
 
         if (storyWords.length === wordCount){
-
-                //fillInTheBlanks();
-
+          // <input class="form-control" id = "wordPush" type="text" name='word' placeholder="Your word here">
                 choosenStory.pasteStory(storyPusher());   
                 $('#pic1').remove();
                 $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
                 $('#wordForm').hide();
                 $("#storyBoard").append(choosenStory.story);
+                fillInTheBlanks();
 
         }else{
                 word = $('#wordPush').val();
                 storyWords.push(word);
+
+                $('#wordForm').fadeOut('slow', function(){ 
+                    fadeCount++;
+
+                    if(fadeCount <= wordCount){
+                      $('#wordForm').fadeIn();  
+
+                    }
+                });
+
         }
         
 });
@@ -41,9 +51,15 @@ function storyPusher() {
 };
 
 //fill in blanks in story 
-function fillInTheBlanks (story) {
+function fillInTheBlanks () {
 
-      $("#blank").append(storyObj.word.replace("+", " "));   
+      for(var i = 0; i < storyWords.length; i++){
+
+        $("#blank" + i).empty();  
+        $("#blank" + i).append(storyWords[i].replace("+", " "));  
+
+      }
+       
 
 };
 
