@@ -1,39 +1,36 @@
-var storyObj = {};
+var storyWords = [];
+var wordCount = 0; 
+var word; 
 
 window.onload = function(){
-//push story selection to storySelect
-storyPusher(); 
 
-//push words to story
-wordPusher(); 
+//push story selection to storySelect
+storyPusher();
+
+$('#wordForm').on('click', function(evt){
+  evt.preventDefault();
+
+        if (storyWords.length === wordCount){
+                //fillInTheBlanks();
+                $('#wordForm').submit();
+
+        }else{
+                word = $('#wordPush').val();
+                storyWords.push(word);
+                console.log(storyWords);
+        }
+        
+});
 
 };
 
-//unpackage story selection 
+//unpackage story selection and send into to gameStart
 function storyPusher() {
 
   var queryString = document.location.search.replace('?', '');
-  var choice = queryString.split('.')
-
-  choice[0];
+  var choice = queryString.split('.');
+  numOfBlanks(choice[0]);
   
-};
-
-//push words to storyObj 
-function wordPusher() {
-
-   var queryString = document.location.search.replace('?', '');
-    var pairs = queryString.split('&').map(function (pair) {
-          return pair.split('=');
-      })
-            if(pairs)
-            pairs.forEach(function (pair) {
-
-                      pair.forEach(function(){
-
-                                 storyObj[pair[0]] = pair[1];
-                         });
-            });
 };
 
 //fill in blanks in story 
@@ -43,35 +40,25 @@ function fillInTheBlanks (story) {
 
 };
 
-function madLibStart(storyChoice) {
+function numOfBlanks(storyChoice) {
     //number of words depends on which story the user chooses
-    var wordCount = 0; 
+    
+
     if(storyChoice === "eulogy"){
 
-      wordCount = 
+      wordCount = 27;
 
+    }else if(storyChoice === "pirate"){
+
+      wordCount = 15;
+
+    }else if(storyChoice === "date"){
+
+      wordCount = 17;
+
+    }else if(storyChoice === "adventure"){
+
+      wordCount = undefined;
     }
-
-    //Once the user chooses a story they should be promted for word after word to enter into the story
-
-    var closureFunction = function() {
-
-        if(roundNumber < GLOBALS.NUMBER_OF_ROUNDS) {
-            // Create the story 
-            for(var i = 0; i < GLOBALS.MOLES_PER_ROUND; i++) {
-                new Mole(GLOBALS.MOLE_UP_MIN*1000, GLOBALS.MOLE_UP_MAX*1000);
-            }
-
-            // Next round, using our precious closed-over parameter 
-            initiateRound(roundNumber + 1);
-        }
-        else {
-            endGame();
-        }
-    };
-
-    // Set it and forget it.
-    setTimeout(closureFunction, GLOBALS.ROUND_COOLDOWN * 1000);
-}
-
+};
 
