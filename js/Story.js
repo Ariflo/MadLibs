@@ -1,9 +1,9 @@
 function Story(){
-
+	this.story; 
 };
 
 //choose selected story and fill in the blanks with user inputs 
-Story.prototype.getSelected = function(story){
+Story.prototype.pasteStory = function(story){
 
 	switch (story) {
 	    case "eulogy":
@@ -26,7 +26,6 @@ Story.prototype.getSelected = function(story){
 	    alert("Check the switch statement, something went horribly wrong!");
 	    break;
 	}
-	
 }
 
-//attach story to the DOM and fillin the blanks 
+

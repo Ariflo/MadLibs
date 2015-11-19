@@ -9,15 +9,21 @@ storyPusher();
 
 $('#wordForm').on('click', function(evt){
   evt.preventDefault();
+  var choosenStory = new Story ();
 
         if (storyWords.length === wordCount){
+
                 //fillInTheBlanks();
-                $('#wordForm').submit();
+
+                choosenStory.pasteStory(storyPusher());   
+                $('#pic1').remove();
+                $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
+                $('#wordForm').hide();
+                $("#storyBoard").append(choosenStory.story);
 
         }else{
                 word = $('#wordPush').val();
                 storyWords.push(word);
-                console.log(storyWords);
         }
         
 });
@@ -30,6 +36,7 @@ function storyPusher() {
   var queryString = document.location.search.replace('?', '');
   var choice = queryString.split('.');
   numOfBlanks(choice[0]);
+  return choice[0];
   
 };
 
@@ -43,7 +50,6 @@ function fillInTheBlanks (story) {
 function numOfBlanks(storyChoice) {
     //number of words depends on which story the user chooses
     
-
     if(storyChoice === "eulogy"){
 
       wordCount = 27;

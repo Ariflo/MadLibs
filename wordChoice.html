@@ -11,10 +11,10 @@
 </head>
 
 <body>
-<div class="container">
-	<img class= "headerPic" src=" images/MadLibs-Logo.png">
+<div id="headDiv"  class="container">
+	<div id="page2img"><img id="pic1" class= "headerPic" src=" images/MadLibs-Logo.png"></div>
 
-	<form id="wordForm" class="form-horizontal"  action="story.html" method="get">
+	<form id="wordForm" class="form-horizontal">
 		<div class= "form-group">
 			<center><label><h3>Enter Word Here:</h3></label></center>
 			<input class="form-control" id = "wordPush" type="text" name='word' placeholder="Your word here">
@@ -23,7 +23,8 @@
 			<center><input class="btn btn-primary"  type="submit" value="SUBMIT" ></center>
 		</div>
 	</form>
-	
+
+	<div id="storyBoard"></div>	
 </div>
 </body>
 </html>
