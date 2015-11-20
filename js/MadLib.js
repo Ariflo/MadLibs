@@ -1,6 +1,8 @@
 var storyWords = [];
 var wordCount = 0;
-var fadeCount = 0;  
+var fadeCount = 0; 
+var blankNum = 1;
+var example; 
 var word; 
 
 window.onload = function(){
@@ -8,16 +10,19 @@ window.onload = function(){
 //push story selection to storySelect
 storyPusher();
 
+
 $('#wordForm').on('submit', function(evt){
   evt.preventDefault();
   var choosenStory = new Story ();
 
         if (storyWords.length === wordCount){
-          // <input class="form-control" id = "wordPush" type="text" name='word' placeholder="Your word here">
+      
                 choosenStory.pasteStory(storyPusher());   
                 $('#pic1').remove();
+
                 $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
                 $('#wordForm').hide();
+
                 $("#storyBoard").append(choosenStory.story);
                 fillInTheBlanks();
 
@@ -33,7 +38,6 @@ $('#wordForm').on('submit', function(evt){
 
                     }
                 });
-
         }
         
 });
@@ -54,6 +58,10 @@ function storyPusher() {
 function fillInTheBlanks () {
 
       for(var i = 0; i < storyWords.length; i++){
+
+        //example = $("#blank" + blankNum);
+        //$("#wordPush").attr('placeholder', example);
+        //blankNum++;
 
         $("#blank" + i).empty();  
         $("#blank" + i).append(storyWords[i].replace("+", " "));  
