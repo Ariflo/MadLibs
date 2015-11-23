@@ -17,41 +17,25 @@ $("#header3").fadeIn();
 }, 3000); 
 
 $("#header").hide();
+
 setInterval(function(){
 
   $("#header").fadeIn('slow');
-  $('.StoryBox').slideDown('slow'); 
-  $('.StoryBox2').slideDown('slow'); 
-  $('.StoryBox3').slideDown('slow'); 
-  $('.StoryBox4').slideDown('slow'); 
+
+  $('#StoryBox').slideDown('slow'); 
+  $('#StoryBox2').slideDown('slow'); 
+  $('#StoryBox3').slideDown('slow'); 
+  $('#StoryBox4').slideDown('slow'); 
 
 }, 6000); 
 
-$('.StoryBox').hide();
-$('.StoryBox2').hide();
-$('.StoryBox3').hide();
-$('.StoryBox4').hide();
+$('#StoryBox').hide();
+$('#StoryBox2').hide();
+$('#StoryBox3').hide();
+$('#StoryBox4').hide();
 
 
-$('.StoryBox').on("mouseenter", function(){
 
-      $(this).add('#StoryBoxFocus');               
-});
-
-$('.StoryBox2').on("mouseenter", function(){
-
-       $(this).add('#StoryBoxFocus');                 
-});
-
-$('.StoryBox3').on("mouseenter", function(){
-
-       $(this).add('#StoryBoxFocus');              
-});
-
-$('.StoryBox4').on("mouseenter", function(){
-
-       $(this).add('#StoryBoxFocus');                
-});
 
 //push story selection to storySelect
 storyPusher();
@@ -88,7 +72,6 @@ $('#wordForm').on('submit', function(evt){
 
       $('#wordForm').hide();
       fillInTheBlanks();
-
       $("#storyBoard").show();
     }  
 });
@@ -110,15 +93,11 @@ function storyPusher() {
 
 //fill in blanks in story 
 function fillInTheBlanks () {
-
+      
       for(var i = 0; i < storyWords.length; i++){
-
         $("#blank" + i).empty();  
         $("#blank" + i).append(storyWords[i].replace("+", " "));  
-
       }
-       
-
 };
 
 function numOfBlanks(storyChoice) {
