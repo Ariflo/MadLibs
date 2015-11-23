@@ -7,17 +7,68 @@
 
 }
 
-.header{
+#header{
+	font-family: "Comic Sans MS", cursive, sans-serif;
 	padding-bottom: 25px; 
 
 }
 
-#StoryBox{
+#header2{
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	padding-top: 50px; 
+	padding-bottom: 25px; 
+
+}
+
+#header3{
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	padding-top: 50px; 
+	padding-bottom: 25px; 
+
+}
+
+
+#StoryBoxFocus{
+	opacity: .9;
+	display: block;
+	float: left; 
+	padding: 25px;
+	width: 25%; 
+	padding-bottom: 20px; 
+}
+
+.StoryBox{
+	opacity: .3;
 	display: block;
 	float: left; 
 	padding: 25px;
 	width: 25%; 
 }
+
+.StoryBox2{
+	opacity: .3;
+	display: block;
+	float: left; 
+	padding: 25px;
+	width: 25%; 
+}
+
+.StoryBox3{
+	opacity: .3;
+	display: block;
+	float: left; 
+	padding: 25px;
+	width: 25%; 
+}
+
+.StoryBox4{
+	opacity: .3;
+	display: block;
+	float: left; 
+	padding: 25px;
+	width: 25%; 
+}
+
 
 #StoryIMG{
 	display: block;
