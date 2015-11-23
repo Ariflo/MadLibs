@@ -55,15 +55,17 @@ $('#wordForm').on('submit', function(evt){
   storyWords.push(word);
 
   $('#wordForm').fadeOut('slow', function(){ 
-    example = $("#blank" + blankNum);
-    blankNum++;   
-                  
-  if(storyWords.length < wordCount){
-      $('#wordPush').val(' ');
-      $('#wordForm').fadeIn();   
 
-      $("#headTag").empty();
-      example.clone().appendTo($("#headTag"));
+    example = $("#blank" + storyWords.length);   
+
+    $('#wordPush').val(' ');
+
+    $("#headTag").empty();
+    example.clone().appendTo($("#headTag"));
+
+  if(storyWords.length < wordCount){
+   
+      $('#wordForm').fadeIn();   
 
     }else{
 
@@ -71,11 +73,11 @@ $('#wordForm').on('submit', function(evt){
       $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
 
       $('#wordForm').hide();
+
       fillInTheBlanks();
       $("#storyBoard").show();
     }  
 });
-
       
 });
 
@@ -93,10 +95,11 @@ function storyPusher() {
 
 //fill in blanks in story 
 function fillInTheBlanks () {
-      
+
       for(var i = 0; i < storyWords.length; i++){
+
         $("#blank" + i).empty();  
-        $("#blank" + i).append(storyWords[i].replace("+", " "));  
+        $("#blank" + i).append(storyWords[i].replace("+", " ")); 
       }
 };
 
