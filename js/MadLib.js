@@ -3,83 +3,92 @@ var wordCount = 0;
 var blankNum = 1;
 var example; 
 var word; 
+var wordType; 
+var wordType2;
 
 window.onload = function(){
 
-setInterval(function(){$("#header2").fadeOut();}, 1500);
+          setInterval(function(){$("#header2").fadeOut();}, 1500);
 
-$("#header3").hide();
+          $("#header3").hide();
 
-setTimeout(function(){
-$("#header3").fadeIn();
+          setTimeout(function(){
+          $("#header3").fadeIn();
 
-  setInterval(function(){$("#header3").fadeOut();},2000);
-}, 3000); 
+            setInterval(function(){$("#header3").fadeOut();},2000);
+          }, 3000); 
 
-$("#header").hide();
+          $("#header").hide();
 
-setInterval(function(){
+          setInterval(function(){
 
-  $("#header").fadeIn('slow');
+            $("#header").fadeIn('slow');
 
-  $('#StoryBox').slideDown('slow'); 
-  $('#StoryBox2').slideDown('slow'); 
-  $('#StoryBox3').slideDown('slow'); 
-  $('#StoryBox4').slideDown('slow'); 
+            $('#StoryBox').slideDown('slow'); 
+            $('#StoryBox2').slideDown('slow'); 
+            $('#StoryBox3').slideDown('slow'); 
+            $('#StoryBox4').slideDown('slow'); 
 
-}, 6000); 
+          }, 6000); 
 
-$('#StoryBox').hide();
-$('#StoryBox2').hide();
-$('#StoryBox3').hide();
-$('#StoryBox4').hide();
+          $('#StoryBox').hide();
+          $('#StoryBox2').hide();
+          $('#StoryBox3').hide();
+          $('#StoryBox4').hide();
 
+          //push story selection to storySelect
+          storyPusher();
 
+          var choosenStory = new Story ();
+          choosenStory.pasteStory(storyPusher()); 
 
+          $("#storyBoard").append(choosenStory.story);
+          $("#storyBoard").hide(); 
 
-//push story selection to storySelect
-storyPusher();
+          $("#blank0").clone().appendTo($("#headTag"));
 
-var choosenStory = new Story ();
-choosenStory.pasteStory(storyPusher()); 
+          $('#wordForm').on('submit', function(evt){
+            evt.preventDefault();
+            word = $('#wordPush').val();
 
-$("#storyBoard").append(choosenStory.story);
-$("#storyBoard").hide(); 
+            wordType = $("#headTag").text();
+            dicWordCheck(word, wordType);
 
-$("#blank0").clone().appendTo($("#headTag"));
+            if(dicWordCheck(word, wordType) === false){
+                    
+                    return false; 
 
-$('#wordForm').on('submit', function(evt){
-  evt.preventDefault();
+            }else{
+            
+                      storyWords.push(word);
 
-  word = $('#wordPush').val();
-  storyWords.push(word);
+                      $('#wordForm').fadeOut('slow', function(){ 
 
-  $('#wordForm').fadeOut('slow', function(){ 
+                        example = $("#blank" + storyWords.length);   
 
-    example = $("#blank" + storyWords.length);   
+                        $('#wordPush').val(' ');
 
-    $('#wordPush').val(' ');
+                        $("#headTag").empty();
+                        example.clone().appendTo($("#headTag"));
 
-    $("#headTag").empty();
-    example.clone().appendTo($("#headTag"));
+                      if(storyWords.length < wordCount){
+                       
+                          $('#wordForm').fadeIn();   
 
-  if(storyWords.length < wordCount){
-   
-      $('#wordForm').fadeIn();   
+                        }else{
 
-    }else{
+                                  $('#pic1').remove();
+                                  $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
 
-      $('#pic1').remove();
-      $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
+                                  $('#wordForm').hide();
 
-      $('#wordForm').hide();
-
-      fillInTheBlanks();
-      $("#storyBoard").show();
-    }  
-});
-      
-});
+                                  fillInTheBlanks();
+                                  $("#storyBoard").show();
+                        }  
+                      
+                      });
+                }
+          });
 
 };
 
@@ -123,4 +132,44 @@ function numOfBlanks(storyChoice) {
       wordCount = undefined;
     }
 };
+
+
+//call dictionary api to validate user's input 
+function dicWordCheck(word, wordType) {
+
+      var dictionaryQueryRequest;
+      //wordType.toLowerCase();
+
+      dictionaryQueryString = word;
+      searchUrl = "http://api.wordnik.com/v4/word.json/" + word + "/definitions?api_key=fbe35028dbc86f86f900107cadc072d6b918773fd53e1764b";
+
+
+      // Generate the request object
+      dictionaryQueryRequest = $.ajax({
+            type: "GET",
+            dataType: 'json',
+            url: searchUrl
+      });
+
+      dictionaryQueryRequest.done(function (data) { 
+
+            if(wordType === "Noun (plural)"){
+
+                wordType2 = "noun";
+            }
+
+            if (data[0].partOfSpeech !== wordType2){
+
+                        alert("Sorry, according to the english language you did not enter a " + wordType + ".");
+                        return false; 
+            }  
+                
+      });
+
+
+
+
+}; 
+
+
 
