@@ -39,43 +39,41 @@ window.onload = function(){
           //push story selection to storySelect
           storyPusher();
 
-          var choosenStory = new Story ();
-          choosenStory.pasteStory(storyPusher()); 
+          //$('#StoryIMG').on('click', function(){
 
-          $("#storyBoard").append(choosenStory.story);
-          $("#storyBoard").hide(); 
+              var choosenStory = new Story ();
+              choosenStory.pasteStory(storyPusher()); 
 
-          $("#blank0").clone().appendTo($("#headTag"));
+              $("#storyBoard").append(choosenStory.story);
+              $("#storyBoard").hide(); 
+
+              $("#blank0").clone().appendTo($("#headTag"));
+
+          //});
 
           $('#wordForm').on('submit', function(evt){
-            evt.preventDefault();
-            word = $('#wordPush').val();
+                      evt.preventDefault();
+                      word = $('#wordPush').val();
 
-            wordType = $("#headTag").text();
-            dicWordCheck(word, wordType);
+                      wordType = $("#headTag").text();
+                      dicWordCheck(word, wordType);
 
-            if(dicWordCheck(word, wordType) === false){
-                    
-                    return false; 
-
-            }else{
-            
                       storyWords.push(word);
 
                       $('#wordForm').fadeOut('slow', function(){ 
 
-                        example = $("#blank" + storyWords.length);   
+                            example = $("#blank" + storyWords.length);   
 
-                        $('#wordPush').val(' ');
+                            $('#wordPush').val('');
 
-                        $("#headTag").empty();
-                        example.clone().appendTo($("#headTag"));
+                            $("#headTag").empty();
+                            example.clone().appendTo($("#headTag"));
 
-                      if(storyWords.length < wordCount){
-                       
-                          $('#wordForm').fadeIn();   
+                            if(storyWords.length < wordCount){
+                                       
+                                  $('#wordForm').fadeIn();   
 
-                        }else{
+                            }else{
 
                                   $('#pic1').remove();
                                   $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
@@ -84,13 +82,13 @@ window.onload = function(){
 
                                   fillInTheBlanks();
                                   $("#storyBoard").show();
-                        }  
-                      
+                            }  
+                                
                       });
-                }
           });
-
 };
+
+
 
 //unpackage story selection and send into to gameStart
 function storyPusher() {
@@ -138,11 +136,7 @@ function numOfBlanks(storyChoice) {
 function dicWordCheck(word, wordType) {
 
       var dictionaryQueryRequest;
-      //wordType.toLowerCase();
-
-      dictionaryQueryString = word;
       searchUrl = "http://api.wordnik.com/v4/word.json/" + word + "/definitions?api_key=fbe35028dbc86f86f900107cadc072d6b918773fd53e1764b";
-
 
       // Generate the request object
       dictionaryQueryRequest = $.ajax({
@@ -151,23 +145,22 @@ function dicWordCheck(word, wordType) {
             url: searchUrl
       });
 
-      dictionaryQueryRequest.done(function (data) { 
+      dictionaryQueryRequest.done(function (data) {
 
-            if(wordType === "Noun (plural)"){
+            wordType2 = wordType.toLowerCase(); 
 
-                wordType2 = "noun";
-            }
-
-            if (data[0].partOfSpeech !== wordType2){
+            ************console.log(wordType2.split('(', ')'));**************
+            if (!data[0].partOfSpeech.startsWith(wordType2)){
 
                         alert("Sorry, according to the english language you did not enter a " + wordType + ".");
-                        return false; 
             }  
                 
       });
 
-
-
+      dictionaryQueryRequest.fail(function (error) {
+           console.log("Something Failed During Wordnik Request:");
+           console.log(error);
+         });
 
 }; 
 
