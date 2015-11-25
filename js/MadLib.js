@@ -39,8 +39,6 @@ window.onload = function(){
           //push story selection to storySelect
           storyPusher();
 
-          //$('#StoryIMG').on('click', function(){
-
               var choosenStory = new Story ();
               choosenStory.pasteStory(storyPusher()); 
 
@@ -49,43 +47,49 @@ window.onload = function(){
 
               $("#blank0").clone().appendTo($("#headTag"));
 
-          //});
+          
 
           $('#wordForm').on('submit', function(evt){
-                      evt.preventDefault();
-                      word = $('#wordPush').val();
+                  evt.preventDefault();
+                  word = $('#wordPush').val();
 
-                      wordType = $("#headTag").text();
-                      dicWordCheck(word, wordType);
+                  wordType = $("#headTag").text();
 
-                      storyWords.push(word);
+                  dicWordCheck(word, wordType, function(isSuccess){
+                        if(isSuccess === false){
+                             return false; 
+                        }
+                        else{
+                                 storyWords.push(word);
 
-                      $('#wordForm').fadeOut('slow', function(){ 
+                              $('#wordForm').fadeOut('slow', function(){ 
 
-                            example = $("#blank" + storyWords.length);   
+                                    example = $("#blank" + storyWords.length);   
 
-                            $('#wordPush').val('');
+                                    $('#wordPush').val('');
 
-                            $("#headTag").empty();
-                            example.clone().appendTo($("#headTag"));
+                                    $("#headTag").empty();
+                                    example.clone().appendTo($("#headTag"));
 
-                            if(storyWords.length < wordCount){
-                                       
-                                  $('#wordForm').fadeIn();   
+                                    if(storyWords.length < wordCount){
+                                                   
+                                          $('#wordForm').fadeIn();   
 
-                            }else{
+                                    }else{
 
-                                  $('#pic1').remove();
-                                  $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
+                                          $('#pic1').remove();
+                                          $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
 
-                                  $('#wordForm').hide();
+                                          $('#wordForm').hide();
 
-                                  fillInTheBlanks();
-                                  $("#storyBoard").show();
-                            }  
-                                
-                      });
-          });
+                                          fillInTheBlanks();
+                                          $("#storyBoard").show();
+                                    }  
+                              });
+                        }
+                  });
+
+            });
 };
 
 
@@ -133,7 +137,7 @@ function numOfBlanks(storyChoice) {
 
 
 //call dictionary api to validate user's input 
-function dicWordCheck(word, wordType) {
+function dicWordCheck(word, wordType, callback) {
 
       var dictionaryQueryRequest;
       searchUrl = "http://api.wordnik.com/v4/word.json/" + word + "/definitions?api_key=fbe35028dbc86f86f900107cadc072d6b918773fd53e1764b";
@@ -148,10 +152,13 @@ function dicWordCheck(word, wordType) {
       dictionaryQueryRequest.done(function (data) {
 
             wordType2 = wordType.toLowerCase(); 
-            
+
             if (!data[0].partOfSpeech.startsWith(wordType2.substr(0, 3))){
 
                         alert("Sorry, according to the english language you did not enter a " + wordType + ".");
+                        callback(false);
+            }else{
+              callback(true);
             }  
                 
       });
