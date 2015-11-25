@@ -152,14 +152,19 @@ function dicWordCheck(word, wordType, callback) {
       dictionaryQueryRequest.done(function (data) {
 
             wordType2 = wordType.toLowerCase(); 
+            console.log(data[0].partOfSpeech);
+            if (wordType2 === "family member" || wordType2 === "number" || wordType2 === "military rank" || wordType2 === "award" || wordType2 === "feeling" || wordType2 === "your name" || wordType2 === "part of the body" || wordType2 === "article of clothing" || wordType2 === "body part" || wordType2 === "another body part"){
+              
+                  callback(true);
 
-            if (!data[0].partOfSpeech.startsWith(wordType2.substr(0, 3))){
+            }else if (!data[0].partOfSpeech.startsWith(wordType2.substr(0, 3))){
 
                         alert("Sorry, according to the english language you did not enter a " + wordType + ".");
                         callback(false);
             }else{
-              callback(true);
-            }  
+
+                  callback(true);
+            }
                 
       });
 
