@@ -8,19 +8,19 @@ var wordType2;
 
 window.onload = function(){
 
-          setInterval(function(){$("#header2").fadeOut();}, 1500);
+      setInterval(function(){$("#header2").fadeOut();}, 1500);
 
-          $("#header3").hide();
+      $("#header3").hide();
 
-          setTimeout(function(){
-          $("#header3").fadeIn();
+      setTimeout(function(){
+      $("#header3").fadeIn();
 
-            setInterval(function(){$("#header3").fadeOut();},2000);
+      setInterval(function(){$("#header3").fadeOut();},2000);
           }, 3000); 
 
-          $("#header").hide();
+      $("#header").hide();
 
-          setInterval(function(){
+      setInterval(function(){
 
             $("#header").fadeIn('slow');
 
@@ -29,27 +29,27 @@ window.onload = function(){
             $('#StoryBox3').slideDown('slow'); 
             $('#StoryBox4').slideDown('slow'); 
 
-          }, 6000); 
+      }, 6000); 
 
-          $('#StoryBox').hide();
-          $('#StoryBox2').hide();
-          $('#StoryBox3').hide();
-          $('#StoryBox4').hide();
+      $('#StoryBox').hide();
+      $('#StoryBox2').hide();
+      $('#StoryBox3').hide();
+      $('#StoryBox4').hide();
 
-          //push story selection to storySelect
-          storyPusher();
+      //push story selection to storySelect
+      storyPusher();
 
-              var choosenStory = new Story ();
-              choosenStory.pasteStory(storyPusher()); 
+      var choosenStory = new Story ();
+      choosenStory.pasteStory(storyPusher()); 
 
-              $("#storyBoard").append(choosenStory.story);
-              $("#storyBoard").hide(); 
+      $("#storyBoard").append(choosenStory.story);
+      $("#storyBoard").hide(); 
 
-              $("#blank0").clone().appendTo($("#headTag"));
+      $("#blank0").clone().appendTo($("#headTag"));
 
           
 
-          $('#wordForm').on('submit', function(evt){
+      $('#wordForm').on('submit', function(evt){
                   evt.preventDefault();
                   word = $('#wordPush').val();
 
@@ -89,7 +89,7 @@ window.onload = function(){
                         }
                   });
 
-            });
+      });
 };
 
 
