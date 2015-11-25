@@ -148,9 +148,8 @@ function dicWordCheck(word, wordType) {
       dictionaryQueryRequest.done(function (data) {
 
             wordType2 = wordType.toLowerCase(); 
-
-            ************console.log(wordType2.split('(', ')'));**************
-            if (!data[0].partOfSpeech.startsWith(wordType2)){
+            
+            if (!data[0].partOfSpeech.startsWith(wordType2.substr(0, 3))){
 
                         alert("Sorry, according to the english language you did not enter a " + wordType + ".");
             }  
