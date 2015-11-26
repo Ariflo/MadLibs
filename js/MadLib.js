@@ -37,59 +37,64 @@ window.onload = function(){
       $('#StoryBox4').hide();
 
       //push story selection to storySelect
-      storyPusher();
+      if(storyPusher() === "adventure"){
 
-      var choosenStory = new Story ();
-      choosenStory.pasteStory(storyPusher()); 
 
-      $("#storyBoard").append(choosenStory.story);
-      $("#storyBoard").hide(); 
+      }else{
+              var choosenStory = new Story ();
+              choosenStory.pasteStory(storyPusher()); 
 
-      $("#blank0").clone().appendTo($("#headTag"));
+              $("#storyBoard").append(choosenStory.story);
+              $("#storyBoard").hide(); 
 
-          
+              $("#blank0").clone().appendTo($("#headTag"));
 
-      $('#wordForm').on('submit', function(evt){
-                  evt.preventDefault();
-                  word = $('#wordPush').val();
+              $('#wordForm').on('submit', function(evt){
+                          evt.preventDefault();
+                          word = $('#wordPush').val();
 
-                  wordType = $("#headTag").text();
+                          wordType = $("#headTag").text();
 
-                  dicWordCheck(word, wordType, function(isSuccess){
-                        if(isSuccess === false){
-                             return false; 
-                        }
-                        else{
-                                 storyWords.push(word);
+                          dicWordCheck(word, wordType, function(isSuccess){
+                                if(isSuccess === false){
+                                     return false; 
+                                }
+                                else{
+                                         storyWords.push(word);
 
-                              $('#wordForm').fadeOut('slow', function(){ 
+                                      $('#wordForm').fadeOut('slow', function(){ 
 
-                                    example = $("#blank" + storyWords.length);   
+                                            example = $("#blank" + storyWords.length);   
 
-                                    $('#wordPush').val('');
+                                            $('#wordPush').val('');
 
-                                    $("#headTag").empty();
-                                    example.clone().appendTo($("#headTag"));
+                                            $("#headTag").empty();
+                                            example.clone().appendTo($("#headTag"));
 
-                                    if(storyWords.length < wordCount){
-                                                   
-                                          $('#wordForm').fadeIn();   
+                                            if(storyWords.length < wordCount){
+                                                           
+                                                  $('#wordForm').fadeIn();   
 
-                                    }else{
+                                            }else{
 
-                                          $('#pic1').remove();
-                                          $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
+                                                  $('#pic1').remove();
+                                                  $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
 
-                                          $('#wordForm').hide();
+                                                  $('#wordForm').hide();
 
-                                          fillInTheBlanks();
-                                          $("#storyBoard").show();
-                                    }  
-                              });
-                        }
+                                                  fillInTheBlanks();
+                                                  $("#storyBoard").show();
+                                            }  
+                                      });
+                                }
+                          });
+
                   });
 
-      });
+
+            };
+
+      
 };
 
 
