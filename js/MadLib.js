@@ -37,12 +37,26 @@ window.onload = function(){
       $('#StoryBox4').hide();
 
       //push story selection to storySelect
+      storyPusher()
+
+      var choosenStory = new Story ();
+      choosenStory.pasteStory(storyPusher());
+
+      console.log(storyPusher());
+
       if(storyPusher() === "adventure"){
 
+            $("#headTag").text('Your Story Here');
+            $("#wordInputField").empty().append('<textarea class="form-control" rows="3" required></textarea>');
 
-      }else{
-              var choosenStory = new Story ();
-              choosenStory.pasteStory(storyPusher()); 
+            $('#wordForm').on("submit", function(evt){
+
+                    //console.log("this submit worked!"); 
+                    $('#wordForm').empty();
+
+                  });
+
+      }else{ 
 
               $("#storyBoard").append(choosenStory.story);
               $("#storyBoard").hide(); 
@@ -50,49 +64,49 @@ window.onload = function(){
               $("#blank0").clone().appendTo($("#headTag"));
 
               $('#wordForm').on('submit', function(evt){
-                          evt.preventDefault();
-                          word = $('#wordPush').val();
+                        evt.preventDefault();
+                        word = $('#wordPush').val();
 
-                          wordType = $("#headTag").text();
+                        wordType = $("#headTag").text();
 
-                          dicWordCheck(word, wordType, function(isSuccess){
-                                if(isSuccess === false){
+                        dicWordCheck(word, wordType, function(isSuccess){
+                              if(isSuccess === false){
                                      return false; 
-                                }
-                                else{
-                                         storyWords.push(word);
 
-                                      $('#wordForm').fadeOut('slow', function(){ 
+                              }else{
+                                        storyWords.push(word);
 
-                                            example = $("#blank" + storyWords.length);   
+                                        $('#wordForm').fadeOut('slow', function(){ 
 
-                                            $('#wordPush').val('');
+                                                example = $("#blank" + storyWords.length);   
 
-                                            $("#headTag").empty();
-                                            example.clone().appendTo($("#headTag"));
+                                                $('#wordPush').val('');
 
-                                            if(storyWords.length < wordCount){
-                                                           
-                                                  $('#wordForm').fadeIn();   
+                                                $("#headTag").empty();
+                                                example.clone().appendTo($("#headTag"));
 
-                                            }else{
+                                                if(storyWords.length < wordCount){
+                                                               
+                                                      $('#wordForm').fadeIn();   
 
-                                                  $('#pic1').remove();
-                                                  $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
+                                                }else{
 
-                                                  $('#wordForm').hide();
+                                                      $('#pic1').remove();
+                                                      $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
 
-                                                  fillInTheBlanks();
-                                                  $("#storyBoard").show();
-                                            }  
-                                      });
-                                }
-                          });
+                                                      $('#wordForm').hide();
+
+                                                      fillInTheBlanks();
+                                                      $("#storyBoard").show();
+                                                  }  
+                                            });
+                                    }
+                        });
 
                   });
 
 
-            };
+            }
 
       
 };
