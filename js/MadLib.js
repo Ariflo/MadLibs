@@ -1,6 +1,6 @@
 var storyWords = [];
-var wordCount = 0;
 var blankNum = 1;
+var wordCount;
 var example; 
 var word; 
 var wordType; 
@@ -42,19 +42,89 @@ window.onload = function(){
       var choosenStory = new Story ();
       choosenStory.pasteStory(storyPusher());
 
-      console.log(storyPusher());
-
       if(storyPusher() === "adventure"){
+            var blankTypes = [];
+            var authorInput;
+            var authorInput2;
+            var counter = 0;
 
-            $("#headTag").text('Your Story Here');
-            $("#wordInputField").empty().append('<textarea class="form-control" rows="3" required></textarea>');
+            $("#headTag").text('Story Title');
+            $("#wordPush").attr("placeholder", "Your Title Here"); 
+            $('#wordForm').append('<div class= "form-group"> <center><input id="completeBtn" class="btn btn-success"  type="submit" value="Story Complete" ></center></div>');
 
-            $('#wordForm').on("submit", function(evt){
+            $('#submitBtn').on("click", function(evt){
+                    evt.preventDefault();
+                    authorInput = $('#wordPush').val();
+                    authorInput2 = authorInput.toLowerCase();
 
-                    //console.log("this submit worked!"); 
-                    $('#wordForm').empty();
+                  if(authorInput2.includes("blank")){
 
-                  });
+                        $('#wordForm').fadeOut('slow', function(){ 
+
+                        $('#wordPush').val('');
+                        $("#headTag").text('Tag your BLANK');
+      
+                        $("#wordPush").attr("placeholder", "Blank Type Here");
+                        $('#wordForm').fadeIn();
+
+                      });
+
+
+                    }else{
+
+                        $('#wordForm').fadeOut('slow', function(){ 
+                              wordCount++;
+
+                              $('#wordPush').val('');
+                              $("#headTag").text('Please Enter Sentence ' + blankNum);
+                              blankNum++;
+
+                              $("#wordPush").attr("placeholder", "Your Sentence Here");
+                              $('#wordForm').fadeIn();
+                        
+                          }); 
+
+                    }  
+
+                    if(wordCount === 0){
+
+                      choosenStory.story.append('<h2 id="title">'+ authorInput +'</h2>');
+
+                    }else if (wordCount > 0 && (authorInput2.includes("blank") || authorInput.length > 20)){
+
+                      choosenStory.story.append('<p>'+ authorInput +'</p>');
+
+                    }else{
+
+                      blankTypes.push(authorInput);
+                     //$('<b id="blank '+ counter + '">' + authorInput + '</b>');
+
+                    // counter++;
+                    }
+
+            });
+
+            $('#completeBtn').on('click',function(evt){
+                  evt.preventDefault();
+
+                  $("#headTag").fadeOut(); 
+                  $('#completeBtn').fadeOut();
+                  $('#submitBtn').fadeOut();
+                  $('#wordPush').fadeOut();
+                  
+
+                  $("#storyBoard").append(choosenStory.story);
+                  $("#storyBoard").hide();
+
+                  var title = $('#title').text();
+
+                  setTimeout(function(){
+                   $("#headTag").text('Its Time to Build').fadeIn('slow');
+
+                  setInterval(function(){$("#headTag").text(title).fadeIn();}, 3000);
+                  }, 1000); 
+
+            });  
 
       }else{ 
 
@@ -69,8 +139,9 @@ window.onload = function(){
 
                         wordType = $("#headTag").text();
 
-                        dicWordCheck(word, wordType, function(isSuccess){
+                        WordCheck(word, wordType, function(isSuccess){
                               if(isSuccess === false){
+
                                      return false; 
 
                               }else{
@@ -150,13 +221,13 @@ function numOfBlanks(storyChoice) {
 
     }else if(storyChoice === "adventure"){
 
-      wordCount = undefined;
+      wordCount = 0;
     }
 };
 
 
 //call dictionary api to validate user's input 
-function dicWordCheck(word, wordType, callback) {
+function WordCheck(word, wordType, callback) {
 
       var dictionaryQueryRequest;
       searchUrl = "http://api.wordnik.com/v4/word.json/" + word + "/definitions?api_key=fbe35028dbc86f86f900107cadc072d6b918773fd53e1764b";
@@ -171,18 +242,19 @@ function dicWordCheck(word, wordType, callback) {
       dictionaryQueryRequest.done(function (data) {
 
             wordType2 = wordType.toLowerCase(); 
-            console.log(data[0].partOfSpeech);
-            if (wordType2 === "family member" || wordType2 === "number" || wordType2 === "military rank" || wordType2 === "award" || wordType2 === "feeling" || wordType2 === "your name" || wordType2 === "part of the body" || wordType2 === "article of clothing" || wordType2 === "body part" || wordType2 === "another body part"){
+            
+            if (!wordType2.includes("noun") && !wordType2.includes("verb") && !wordType2.includes("adjective") && !wordType2.includes("adverb") && !wordType2.includes("pronoun") && !wordType2.includes("conjuction") && !wordType2.includes("preposition") && !wordType2.includes("interjection") && !wordType2.includes("article")){
               
                   callback(true);
 
             }else if (!data[0].partOfSpeech.startsWith(wordType2.substr(0, 3))){
 
-                        alert("Sorry, according to the english language you did not enter a " + wordType + ".");
-                        callback(false);
+                  alert("Sorry, according to the english language you did not enter a " + wordType + ".");
+                  callback(false);
+
             }else{
 
-                  callback(true);
+                callback(true);
             }
                 
       });
