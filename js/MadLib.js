@@ -92,20 +92,23 @@ window.onload = function(){
 
                     }else if (wordCount > 0 && (authorInput2.includes("blank") || authorInput.length > 20)){
 
-                      choosenStory.story.append('<p>'+ authorInput +'</p>');
+                      choosenStory.story.append('<p id="line'+ wordCount +'">'+ authorInput +'</p>');
 
                     }else{
 
                       blankTypes.push(authorInput);
-                     //$('<b id="blank '+ counter + '">' + authorInput + '</b>');
 
-                    // counter++;
                     }
 
             });
 
             $('#completeBtn').on('click',function(evt){
                   evt.preventDefault();
+                  var storyLine; 
+                  var storyLine2; 
+                  var title;
+                  var authorBlank;
+                  var lineNum = 1;
 
                   $("#headTag").fadeOut(); 
                   $('#completeBtn').fadeOut();
@@ -116,13 +119,36 @@ window.onload = function(){
                   $("#storyBoard").append(choosenStory.story);
                   $("#storyBoard").hide();
 
-                  var title = $('#title').text();
+                  title = $('#title').text();
 
                   setTimeout(function(){
                    $("#headTag").text('Its Time to Build').fadeIn('slow');
 
-                  setInterval(function(){$("#headTag").text(title).fadeIn();}, 3000);
-                  }, 1000); 
+                  setTimeout(function(){
+
+                      $("#headTag").text(title).fadeIn();
+                      for(var i = 0; i <= blankNum; i++){
+
+                        storyLine = $('#line' + lineNum).text().toLowerCase();
+                        lineNum++;
+
+                        if(storyLine.includes('blank')){
+
+                                authorBlank = '<b id="blank '+ counter + '">' + blankTypes[i] + '</b>';
+                                counter++;
+
+                                storyLine2 = storyLine.replace('blank', authorBlank);
+
+                        }
+
+                    }
+
+                       //$("#blank0").clone().appendTo($("#headTag"));
+                       $('#submitBtn').fadeIn();
+                       $('#wordPush').fadeIn();
+
+                  }, 3000);
+                      }, 1000); 
 
             });  
 
