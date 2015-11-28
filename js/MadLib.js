@@ -37,7 +37,7 @@ window.onload = function(){
       $('#StoryBox4').hide();
 
       //push story selection to storySelect
-      storyPusher()
+      storyPusher();
 
       var choosenStory = new Story ();
       choosenStory.pasteStory(storyPusher());
@@ -103,17 +103,17 @@ window.onload = function(){
             });
 
             $('#completeBtn').on('click',function(evt){
-                  evt.preventDefault();
                   var storyLine; 
                   var storyLine2; 
                   var title;
                   var authorBlank;
                   var lineNum = 1;
 
-                  $("#headTag").fadeOut(); 
-                  $('#completeBtn').fadeOut();
-                  $('#submitBtn').fadeOut();
-                  $('#wordPush').fadeOut();
+                  evt.preventDefault();
+                  $("#wordForm").hide(); 
+                  $('#completeBtn').remove();
+                  //$('#submitBtn').fadeOut();
+                  //$('#wordPush').fadeOut();
                   
 
                   $("#storyBoard").append(choosenStory.story);
@@ -126,26 +126,68 @@ window.onload = function(){
 
                   setTimeout(function(){
 
-                      $("#headTag").text(title).fadeIn();
+                      $("#headTag").text(title).fadeOut('slow');
                       for(var i = 0; i <= blankNum; i++){
 
-                        storyLine = $('#line' + lineNum).text().toLowerCase();
+                        storyLine = $('#line' + lineNum);
                         lineNum++;
 
-                        if(storyLine.includes('blank')){
+                            if(storyLine.text().toLowerCase().includes('blank')){
 
-                                authorBlank = '<b id="blank '+ counter + '">' + blankTypes[i] + '</b>';
-                                counter++;
+                                    authorBlank = '<b id="blank'+ counter + '">' + blankTypes[i] + '</b>';
+                                    counter++;
 
-                                storyLine2 = storyLine.replace('blank', authorBlank);
+                                    storyLine2 = storyLine.text().toLowerCase().replace('blank', authorBlank);
+                                    storyLine.html(storyLine2);
+                            }
 
                         }
 
-                    }
+                        $('#wordForm').fadeIn();
+                        $("#blank0").clone().appendTo($("#headTag"));
 
-                       //$("#blank0").clone().appendTo($("#headTag"));
-                       $('#submitBtn').fadeIn();
-                       $('#wordPush').fadeIn();
+                        $('#submitBtn').on('click', function(evt){
+                                  evt.preventDefault();
+                                  word = $('#wordPush').val();
+
+                                  wordType = $("#headTag").text();
+
+                                  WordCheck(word, wordType, function(isSuccess){
+                                        if(isSuccess === false){
+
+                                               return false; 
+
+                                        }else{
+                                                  storyWords.push(word);
+
+                                                  $('#wordForm').fadeOut('slow', function(){ 
+
+                                                          example = $("#blank" + storyWords.length);   
+
+                                                          $('#wordPush').val('');
+
+                                                          $("#headTag").empty();
+                                                          example.clone().appendTo($("#headTag"));
+
+                                                          if(storyWords.length < blankTypes.length){
+                                                                         
+                                                                $('#wordForm').fadeIn();   
+
+                                                          }else{
+
+                                                                $('#pic1').remove();
+                                                                $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
+
+                                                                $('#wordForm').hide();
+
+                                                                fillInTheBlanks();
+                                                                $("#storyBoard").show();
+                                                            }  
+                                                      });
+                                              }
+                                  });
+
+                            });
 
                   }, 3000);
                       }, 1000); 
@@ -204,8 +246,6 @@ window.onload = function(){
 
 
             }
-
-      
 };
 
 
