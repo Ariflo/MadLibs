@@ -131,7 +131,7 @@ window.onload = function(){
 
           $('#wordForm').append('<div class= "form-group"> <center><input id="wordBtn" class="btn btn-primary"  type="submit" value="SUBMIT" ></center></div>');
           $('#wordBtn').hide();
-          
+
           setTimeout(function(){
 
           $("#headTag").empty();
@@ -193,7 +193,10 @@ window.onload = function(){
                                                   $('#wordForm').hide();
 
                                                   fillInTheBlanks();
+                                                  $('#storyBoard').append('<div class= "form-group"> <center><input id="wordBtn" class="btn btn-danger"  type="button" value="SAVE STORY" ></center></div>');
                                                   $("#storyBoard").show();
+
+                                                  //console.log($("#storyBoard"));
                                               }  
                                         });
                               }
@@ -245,7 +248,11 @@ window.onload = function(){
                                                       $('#wordForm').hide();
 
                                                       fillInTheBlanks();
+                                                      $('#storyBoard').append('<div class= "form-group"> <center><input id="wordBtn" class="btn btn-danger"  type="button" value="SAVE STORY" ></center></div>');
                                                       $("#storyBoard").show();
+
+                                                      //localStorage.setObj(key, value)
+                                                      //console.log($("#storyBoard").html());
                                                   }  
                                             });
                                     }
