@@ -123,23 +123,22 @@ window.onload = function(){
           title = $('#title').text();
           
           setTimeout(function(){
-            $("#headTag").text('Its Time to Build').fadeIn(1500); 
+            $("#headTag").text('Time to Create').fadeIn(1500); 
 
             setTimeout(function(){
-              $("#headTag").text(title).fadeOut(4000);}, 3000);
+              $("#headTag").text(title).fadeOut(3000);}, 3000);
           }, 1000); 
 
           $('#wordForm').append('<div class= "form-group"> <center><input id="wordBtn" class="btn btn-primary"  type="submit" value="SUBMIT" ></center></div>');
           $('#wordBtn').hide();
+          
+          setTimeout(function(){
 
-          //Trying to work here to show the user the type of word needed to finish the story
-          setInterval(function(){
           $("#headTag").empty();
           $("#blank0").clone().appendTo($("#headTag"));
-
-          $("#headTag").show();
-          $('#wordBtn').fadeIn();
-          $('#wordPush').fadeIn().attr("placeholder", "Your Word Here");}, 5000);
+          $("#headTag").fadeIn(2000);
+          $('#wordBtn').fadeIn(2000);
+          $('#wordPush').fadeIn(2000).attr("placeholder", "Your Word Here");}, 7000);
 
           for(var i = 0; i <= blankNum; i++){
 
@@ -156,6 +155,7 @@ window.onload = function(){
               }
 
           }
+
           
           $('#wordBtn').on('click', function(evt){
                     evt.preventDefault();
