@@ -43,156 +43,154 @@ window.onload = function(){
       choosenStory.pasteStory(storyPusher());
 
       if(storyPusher() === "adventure"){
-            var blankTypes = [];
-            var authorInput;
-            var authorInput2;
-            var counter = 0;
+        var blankTypes = [];
+        var authorInput;
+        var authorInput2;
+        var counter = 0;
 
-            $("#headTag").text('Story Title');
-            $("#wordPush").attr("placeholder", "Your Title Here"); 
-            $('#wordForm').append('<div class= "form-group"> <center><input id="completeBtn" class="btn btn-success"  type="submit" value="Story Complete" ></center></div>');
+        $("#headTag").text('Story Title');
+        $("#wordPush").attr("placeholder", "Your Title Here"); 
+        $('#wordForm').append('<div class= "form-group"> <center><input id="completeBtn" class="btn btn-success"  type="submit" value="Story Complete" ></center></div>');
 
-            $('#submitBtn').on("click", function(evt){
+        $('#submitBtn').on("click", function(evt){
+                evt.preventDefault();
+                authorInput = $('#wordPush').val();
+                authorInput2 = authorInput.toLowerCase();
+
+              if(authorInput2.includes("blank")){
+
+                    $('#wordForm').fadeOut('slow', function(){ 
+
+                    $('#wordPush').val('');
+                    $("#headTag").text('Tag your BLANK');
+        
+                    $("#wordPush").attr("placeholder", "Blank Type Here");
+                    $('#wordForm').fadeIn();
+
+                  });
+
+
+                }else{
+
+                    $('#wordForm').fadeOut('slow', function(){ 
+                          wordCount++;
+
+                          $('#wordPush').val('');
+                          $("#headTag").text('Please Enter Sentence ' + blankNum);
+                          blankNum++;
+
+                          $("#wordPush").attr("placeholder", "Your Sentence Here");
+                          $('#wordForm').fadeIn();
+                    
+                      }); 
+
+                }  
+
+                if(wordCount === 0){
+
+                  choosenStory.story.append('<h2 id="title">'+ authorInput +'</h2>');
+
+                }else if (wordCount > 0 && (authorInput2.includes("blank") || authorInput.length > 20)){
+
+                  choosenStory.story.append('<p id="line'+ wordCount +'">'+ authorInput +'</p>');
+
+                }else{
+
+                  blankTypes.push(authorInput);
+
+                }
+
+        }); 
+        
+        $('#completeBtn').on('click',function(evt){
+          evt.preventDefault();
+
+          var storyLine; 
+          var storyLine2; 
+          var title;
+          var authorBlank;
+          var lineNum = 1;
+
+          $('#completeBtn').remove();
+          $("#headTag").fadeOut();
+          $('#submitBtn').fadeOut();
+          $('#wordPush').fadeOut();
+
+          $("#storyBoard").append(choosenStory.story);
+          $("#storyBoard").hide();
+          title = $('#title').text();
+          
+          setTimeout(function(){
+            $("#headTag").text('Its Time to Build').fadeIn(1500); 
+
+            setTimeout(function(){$("#headTag").text(title).fadeOut(2500);}, 2000);
+          }, 1000); 
+
+          $("#blank0").clone().appendTo($("#headTag"));
+          //$('#submitBtn').fadeIn(2000);
+          //$('#wordPush').fadeIn(2000);
+
+          for(var i = 0; i <= blankNum; i++){
+
+              storyLine = $('#line' + lineNum);
+              lineNum++;
+
+              if(storyLine.text().toLowerCase().includes('blank')){
+
+                      authorBlank = '<b id="blank'+ counter + '">' + blankTypes[i] + '</b>';
+                      counter++;
+
+                      storyLine2 = storyLine.text().toLowerCase().replace('blank', authorBlank);
+                      storyLine.html(storyLine2);
+              }
+
+          }
+          
+          $('#wordForm').on('submit', function(evt){
+
                     evt.preventDefault();
-                    authorInput = $('#wordPush').val();
-                    authorInput2 = authorInput.toLowerCase();
+                    word = $('#wordPush').val();
 
-                  if(authorInput2.includes("blank")){
+                    wordType = $("#headTag").text();
 
-                        $('#wordForm').fadeOut('slow', function(){ 
+                    WordCheck(word, wordType, function(isSuccess){
+                          if(isSuccess === false){
 
-                        $('#wordPush').val('');
-                        $("#headTag").text('Tag your BLANK');
-      
-                        $("#wordPush").attr("placeholder", "Blank Type Here");
-                        $('#wordForm').fadeIn();
+                                 return false; 
 
-                      });
+                          }else{
+                                    storyWords.push(word);
 
+                                    $('#wordForm').fadeOut('slow', function(){ 
 
-                    }else{
+                                            example = $("#blank" + storyWords.length);   
 
-                        $('#wordForm').fadeOut('slow', function(){ 
-                              wordCount++;
+                                            $('#wordPush').val('');
 
-                              $('#wordPush').val('');
-                              $("#headTag").text('Please Enter Sentence ' + blankNum);
-                              blankNum++;
+                                            $("#headTag").empty();
+                                            example.clone().appendTo($("#headTag"));
 
-                              $("#wordPush").attr("placeholder", "Your Sentence Here");
-                              $('#wordForm').fadeIn();
-                        
-                          }); 
+                                            if(storyWords.length < blankTypes.length){
+                                                           
+                                                  $('#wordForm').fadeIn();   
 
-                    }  
+                                            }else{
 
-                    if(wordCount === 0){
+                                                  $('#pic1').remove();
+                                                  $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
 
-                      choosenStory.story.append('<h2 id="title">'+ authorInput +'</h2>');
+                                                  $('#wordForm').hide();
 
-                    }else if (wordCount > 0 && (authorInput2.includes("blank") || authorInput.length > 20)){
+                                                  fillInTheBlanks();
+                                                  $("#storyBoard").show();
+                                              }  
+                                        });
+                              }
+                    });
 
-                      choosenStory.story.append('<p id="line'+ wordCount +'">'+ authorInput +'</p>');
+              });
 
-                    }else{
-
-                      blankTypes.push(authorInput);
-
-                    }
-
-            });
-
-            $('#completeBtn').on('click',function(evt){
-                  var storyLine; 
-                  var storyLine2; 
-                  var title;
-                  var authorBlank;
-                  var lineNum = 1;
-
-                  evt.preventDefault();
-                  $("#wordForm").hide(); 
-                  $('#completeBtn').remove();
-                  //$('#submitBtn').fadeOut();
-                  //$('#wordPush').fadeOut();
-                  
-
-                  $("#storyBoard").append(choosenStory.story);
-                  $("#storyBoard").hide();
-
-                  title = $('#title').text();
-
-                  setTimeout(function(){
-                   $("#headTag").text('Its Time to Build').fadeIn('slow');
-
-                  setTimeout(function(){
-
-                      $("#headTag").text(title).fadeOut('slow');
-                      for(var i = 0; i <= blankNum; i++){
-
-                        storyLine = $('#line' + lineNum);
-                        lineNum++;
-
-                            if(storyLine.text().toLowerCase().includes('blank')){
-
-                                    authorBlank = '<b id="blank'+ counter + '">' + blankTypes[i] + '</b>';
-                                    counter++;
-
-                                    storyLine2 = storyLine.text().toLowerCase().replace('blank', authorBlank);
-                                    storyLine.html(storyLine2);
-                            }
-
-                        }
-
-                        $('#wordForm').fadeIn();
-                        $("#blank0").clone().appendTo($("#headTag"));
-
-                        $('#submitBtn').on('click', function(evt){
-                                  evt.preventDefault();
-                                  word = $('#wordPush').val();
-
-                                  wordType = $("#headTag").text();
-
-                                  WordCheck(word, wordType, function(isSuccess){
-                                        if(isSuccess === false){
-
-                                               return false; 
-
-                                        }else{
-                                                  storyWords.push(word);
-
-                                                  $('#wordForm').fadeOut('slow', function(){ 
-
-                                                          example = $("#blank" + storyWords.length);   
-
-                                                          $('#wordPush').val('');
-
-                                                          $("#headTag").empty();
-                                                          example.clone().appendTo($("#headTag"));
-
-                                                          if(storyWords.length < blankTypes.length){
-                                                                         
-                                                                $('#wordForm').fadeIn();   
-
-                                                          }else{
-
-                                                                $('#pic1').remove();
-                                                                $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
-
-                                                                $('#wordForm').hide();
-
-                                                                fillInTheBlanks();
-                                                                $("#storyBoard").show();
-                                                            }  
-                                                      });
-                                              }
-                                  });
-
-                            });
-
-                  }, 3000);
-                      }, 1000); 
-
-            });  
+        });
 
       }else{ 
 
@@ -249,7 +247,6 @@ window.onload = function(){
 };
 
 
-
 //unpackage story selection and send into to gameStart
 function storyPusher() {
 
@@ -258,7 +255,7 @@ function storyPusher() {
   numOfBlanks(choice[0]);
 
   return choice[0];
-};
+}
 
 //fill in blanks in story 
 function fillInTheBlanks () {
@@ -268,7 +265,7 @@ function fillInTheBlanks () {
         $("#blank" + i).empty();  
         $("#blank" + i).append(storyWords[i].replace("+", " ")); 
       }
-};
+}
 
 function numOfBlanks(storyChoice) {
     //number of words depends on which story the user chooses
@@ -289,7 +286,7 @@ function numOfBlanks(storyChoice) {
 
       wordCount = 0;
     }
-};
+}
 
 
 //call dictionary api to validate user's input 
@@ -330,7 +327,7 @@ function WordCheck(word, wordType, callback) {
            console.log(error);
          });
 
-}; 
+}
 
 
 
