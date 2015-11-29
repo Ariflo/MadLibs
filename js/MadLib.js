@@ -112,8 +112,8 @@ window.onload = function(){
           var lineNum = 1;
 
           $('#completeBtn').remove();
+          $('#submitBtn').remove();
           $("#headTag").fadeOut();
-          $('#submitBtn').fadeOut();
           $('#wordPush').fadeOut();
 
           $("#storyBoard").append(choosenStory.story);
@@ -123,12 +123,15 @@ window.onload = function(){
           setTimeout(function(){
             $("#headTag").text('Its Time to Build').fadeIn(1500); 
 
-            setTimeout(function(){$("#headTag").text(title).fadeOut(2500);}, 2000);
+            setTimeout(function(){
+              $("#headTag").text(title).fadeOut(2500);}, 2000);
           }, 1000); 
 
+          $('#wordForm').append('<div class= "form-group"> <center><input id="wordBtn" class="btn btn-primary"  type="submit" value="Enter" ></center></div>');
           $("#blank0").clone().appendTo($("#headTag"));
-          //$('#submitBtn').fadeIn(2000);
-          //$('#wordPush').fadeIn(2000);
+          $("#headTag").fadeIn(2000);
+          $('#wordBtn').fadeIn(2000);
+          $('#wordPush').fadeIn(2000).attr("placeholder", "Your Word Here");
 
           for(var i = 0; i <= blankNum; i++){
 
@@ -146,7 +149,7 @@ window.onload = function(){
 
           }
           
-          $('#wordForm').on('submit', function(evt){
+          $('#wordBtn').on('click', function(evt){
 
                     evt.preventDefault();
                     word = $('#wordPush').val();
