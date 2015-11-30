@@ -1,3 +1,17 @@
+//© 2015 Arian Flores All Rights Reserved
+//
+// All rights reserved. No part of this code may be reproduced, distributed, or transmitted in any form or by any means, 
+// including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the creator, except 
+// in the case of brief quotations embodied in critical reviews and certain other noncommercial uses permitted by copyright law.
+//  For permission requests, write to the creator,addressed “Attention: Permissions Coordinator,” at the address below.
+
+// AirMan inc
+// 6330 QuickSilver Avenue
+// San Francisco, CA 94560
+// www.arianflores.com
+
+
+//MADLIBS Global Varibles set here to be used upon page loading
 var storyWords = [];
 var blankNum = 1;
 var wordCount;
@@ -6,8 +20,10 @@ var word;
 var wordType; 
 var wordType2;
 
+
 window.onload = function(){
 
+      //Upon loading, TITLE HEADERS will fade-in and out
       setInterval(function(){$("#header2").fadeOut();}, 1500);
 
       $("#header3").hide();
@@ -24,6 +40,7 @@ window.onload = function(){
 
             $("#header").fadeIn('slow');
 
+            // STORY OPTIONS slideDown
             $('#StoryBox').slideDown('slow'); 
             $('#StoryBox2').slideDown('slow'); 
             $('#StoryBox3').slideDown('slow'); 
@@ -36,22 +53,27 @@ window.onload = function(){
       $('#StoryBox3').hide();
       $('#StoryBox4').hide();
 
-      //push story selection to storySelect
+      //Parse form for USERS SELECTION and return selected
       storyPusher();
 
+      //Create STORY OBJECT and push user's selection into object
       var choosenStory = new Story ();
       choosenStory.pasteStory(storyPusher());
 
+      //USER CREATED content option 
       if(storyPusher() === "adventure"){
+        //LOCAL VARIBLES for user created content
         var blankTypes = [];
         var authorInput;
         var authorInput2;
         var counter = 0;
 
+        //ask user for TITLE input 
         $("#headTag").text('Story Title');
         $("#wordPush").attr("placeholder", "Your Title Here"); 
         $('#wordForm').append('<div class= "form-group"> <center><input id="completeBtn" class="btn btn-success"  type="submit" value="Story Complete" ></center></div>');
 
+        //ask user for STORY inputs
         $('#submitBtn').on("click", function(evt){
                 evt.preventDefault();
                 authorInput = $('#wordPush').val();
@@ -86,6 +108,7 @@ window.onload = function(){
 
                 }  
 
+                //Parse through INPUTS and append where necessary
                 if(wordCount === 0){
 
                   choosenStory.story.append('<h2 id="title">'+ authorInput +'</h2>');
@@ -102,9 +125,11 @@ window.onload = function(){
 
         }); 
         
+        //Upon STORY COMPLETION user is asked to play Mad Libs
         $('#completeBtn').on('click',function(evt){
           evt.preventDefault();
-
+          
+          //LOCAL VARIBLES for user completed content 
           var storyLine; 
           var storyLine2; 
           var title;
@@ -140,6 +165,8 @@ window.onload = function(){
           $('#wordBtn').fadeIn(2000);
           $('#wordPush').fadeIn(2000).attr("placeholder", "Your Word Here");}, 7000);
 
+
+          //Run through the BLANKS and REPLACE them with user input
           for(var i = 0; i <= blankNum; i++){
 
               storyLine = $('#line' + lineNum);
@@ -156,7 +183,7 @@ window.onload = function(){
 
           }
 
-          
+          //user INPUT is pushed  in to  the DOM and pasted to the STORYBOARD
           $('#wordBtn').on('click', function(evt){
                     evt.preventDefault();
 
@@ -196,7 +223,8 @@ window.onload = function(){
                                                   $('#storyBoard').append('<div class= "form-group"> <center><input id="wordBtn" class="btn btn-danger"  type="button" value="SAVE STORY" ></center></div>');
                                                   $("#storyBoard").show();
 
-                                                  //console.log($("#storyBoard"));
+                                                  //localStorage.setObj(key, value)
+                                                  //console.log($("#storyBoard").html());
                                               }  
                                         });
                               }
@@ -208,6 +236,8 @@ window.onload = function(){
 
       }else{ 
 
+              //All OTHER STORY options 
+              //user INPUT is pushed  in to the DOM and pasted to the STORYBOARD
               $("#storyBoard").append(choosenStory.story);
               $("#storyBoard").hide(); 
 
@@ -265,7 +295,7 @@ window.onload = function(){
 };
 
 
-//unpackage story selection and send into to gameStart
+//RETURN story selection and send into to numOfBlanks
 function storyPusher() {
 
   var queryString = document.location.search.replace('?', '');
@@ -275,7 +305,7 @@ function storyPusher() {
   return choice[0];
 }
 
-//fill in blanks in story 
+//Fill in the Blanks of the Story
 function fillInTheBlanks () {
 
       for(var i = 0; i < storyWords.length; i++){
@@ -285,6 +315,8 @@ function fillInTheBlanks () {
       }
 }
 
+
+//ASSIGN number of Blanks to WordCount
 function numOfBlanks(storyChoice) {
     //number of words depends on which story the user chooses
     
@@ -307,13 +339,13 @@ function numOfBlanks(storyChoice) {
 }
 
 
-//call dictionary api to validate user's input 
+//Call Wordnik api to validate user's input 
 function WordCheck(word, wordType, callback) {
 
       var dictionaryQueryRequest;
       searchUrl = "http://api.wordnik.com/v4/word.json/" + word + "/definitions?api_key=fbe35028dbc86f86f900107cadc072d6b918773fd53e1764b";
 
-      // Generate the request object
+      // Generate the requested object
       dictionaryQueryRequest = $.ajax({
             type: "GET",
             dataType: 'json',
@@ -324,6 +356,7 @@ function WordCheck(word, wordType, callback) {
 
             wordType2 = wordType.toLowerCase(); 
             
+            //Check if word matches one of eight typical english parts of speech
             if (!wordType2.includes("noun") && !wordType2.includes("verb") && !wordType2.includes("adjective") && !wordType2.includes("adverb") && !wordType2.includes("pronoun") && !wordType2.includes("conjuction") && !wordType2.includes("preposition") && !wordType2.includes("interjection") && !wordType2.includes("article")){
               
                   callback(true);

@@ -1,8 +1,21 @@
+//© 2015 Arian Flores All Rights Reserved
+//
+// All rights reserved. No part of this code may be reproduced, distributed, or transmitted in any form or by any means, 
+// including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the creator, except 
+// in the case of brief quotations embodied in critical reviews and certain other noncommercial uses permitted by copyright law.
+//  For permission requests, write to the creator,addressed “Attention: Permissions Coordinator,” at the address below.
+
+// AirMan inc
+// 6330 QuickSilver Avenue
+// San Francisco, CA 94560
+// www.arianflores.com
+
+//Create Story Class
 function Story(){
 	this.story; 
 };
 
-//choose selected story and fill in the blanks with user inputs 
+//Take selected story and assign proper div object to Story
 Story.prototype.pasteStory = function(story){
 
 	switch (story) {
