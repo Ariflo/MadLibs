@@ -480,9 +480,9 @@ function numOfBlanks(storyChoice) {
 
 //Call Wordnik api to validate user's input 
 function WordCheck(word, wordType, callback) {
-
+      var word2 = word.toLowerCase(); 
       var dictionaryQueryRequest;
-      searchUrl = "http://api.wordnik.com/v4/word.json/" + word + "/definitions?api_key=fbe35028dbc86f86f900107cadc072d6b918773fd53e1764b";
+      searchUrl = "http://api.wordnik.com/v4/word.json/" + word2 + "/definitions?api_key=fbe35028dbc86f86f900107cadc072d6b918773fd53e1764b";
 
       // Generate the requested object
       dictionaryQueryRequest = $.ajax({
