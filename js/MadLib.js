@@ -249,7 +249,7 @@ window.onload = function(){
 
       }else if(storyPusher() === "saved"){
 
-          var counter = localStorage.length + 1;
+          var counter2 = localStorage.length + 1;
           $('#wordForm').hide();
 
           for (var i = 0; i < localStorage.length; i++){
@@ -257,32 +257,32 @@ window.onload = function(){
 
                   if(localStorage.getItem('savedStoryS') !== null){
 
-                    counter--;
+                    counter2--;
 
-                    $('#storyBoard').prepend('<div class="form-group"><center><input id="eulogyBtn" class="btn btn-info"  type="button" value="Eulogy Story ' + counter + '"></center></div>');
+                    $('#storyBoard').prepend('<div class="form-group"><center><input id="eulogyBtn" class="btn btn-info"  type="button" value="Eulogy Story ' + counter2 + '"></center></div>');
                     retrievedStory = localStorage.getItem('savedStoryS');
 
 
                   }else if(localStorage.getItem('savedStoryY') !== null){
 
-                    counter--;
+                    counter2--;
 
-                    $('#storyBoard').prepend('<div class="form-group"><center><input id="pirateBtn" class="btn btn-info"  type="button" value="Pirate Story ' + counter + '"></center></div>');
+                    $('#storyBoard').prepend('<div class="form-group"><center><input id="pirateBtn" class="btn btn-info"  type="button" value="Pirate Story ' + counter2 + '"></center></div>');
                     retrievedStory = localStorage.getItem('savedStoryY');
 
 
                   }else if (localStorage.getItem('savedStoryI') !== null){
 
-                    counter--;
+                    counter2--;
 
-                    $('#storyBoard').prepend('<div class="form-group"><center><input id="dateBtn" class="btn btn-info"  type="button" value="Hot Date Story ' + counter + '"></center></div>');
+                    $('#storyBoard').prepend('<div class="form-group"><center><input id="dateBtn" class="btn btn-info"  type="button" value="Hot Date Story ' + counter2 + '"></center></div>');
                     retrievedStory = localStorage.getItem('savedStoryI');
 
                   }else{
 
-                    counter--;
+                    counter2--;
 
-                    $('#storyBoard').prepend('<div class="form-group"><center><input id="storyBtn" class="btn btn-info"  type="button" value="Your Story ' + counter + '"></center></div>');
+                    $('#storyBoard').prepend('<div class="form-group"><center><input id="storyBtn" class="btn btn-info"  type="button" value="Your Story ' + counter2 + '"></center></div>');
                     retrievedStory = localStorage.getItem('savedStory2');
 
                   }
