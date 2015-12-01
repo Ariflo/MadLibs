@@ -67,6 +67,13 @@ www.arianflores.com*/
 	width: 25%; 
 }
 
+#StoryBox5{
+	display: block;
+	clear: both; 
+	padding: 25px;
+	width: 100%; 
+}
+
 
 #StoryIMG{
 	display: block;
@@ -74,6 +81,16 @@ www.arianflores.com*/
 	margin-right: auto;
 	height: 400px; 
 	width: 265px;
+}
+
+#SavedStoryIMG{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#savedMsg{
+	color: red;
 }
 
 /*Styled form components*/

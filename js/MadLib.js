@@ -19,6 +19,10 @@ var example;
 var word; 
 var wordType; 
 var wordType2;
+var savedStory;
+var savedStory2;
+var savedStoryLetter;
+var retrievedStory;
 
 
 window.onload = function(){
@@ -45,6 +49,7 @@ window.onload = function(){
             $('#StoryBox2').slideDown('slow'); 
             $('#StoryBox3').slideDown('slow'); 
             $('#StoryBox4').slideDown('slow'); 
+            $('#StoryBox5').slideDown('slow'); 
 
       }, 6000); 
 
@@ -52,6 +57,7 @@ window.onload = function(){
       $('#StoryBox2').hide();
       $('#StoryBox3').hide();
       $('#StoryBox4').hide();
+      $('#StoryBox5').hide();
 
       //Parse form for USERS SELECTION and return selected
       storyPusher();
@@ -220,11 +226,18 @@ window.onload = function(){
                                                   $('#wordForm').hide();
 
                                                   fillInTheBlanks();
-                                                  $('#storyBoard').append('<div class= "form-group"> <center><input id="wordBtn" class="btn btn-danger"  type="button" value="SAVE STORY" ></center></div>');
+                                                  $('#storyBoard').append('<div class= "form-group"> <center><input id="saveBtn" class="btn btn-danger"  type="button" value="SAVE STORY" ></center></div>');
                                                   $("#storyBoard").show();
 
-                                                  //localStorage.setObj(key, value)
-                                                  //console.log($("#storyBoard").html());
+                                                  $('#saveBtn').on('click', function(){
+                                                        $('#saveBtn').remove();
+
+                                                        savedStory = $("#storyBoard").html();
+
+                                                        localStorage.setItem("savedStory2", JSON.stringify(savedStory));
+                                                        $('#storyBoard').append('<div class= "form-group"><strong><p id="savedMsg" class="text-center">SAVED</p></strong></div>');
+                                                  });
+                                          
                                               }  
                                         });
                               }
@@ -233,6 +246,119 @@ window.onload = function(){
               });
 
         });
+
+      }else if(storyPusher() === "saved"){
+
+          var counter = localStorage.length + 1;
+          $('#wordForm').hide();
+
+          for (var i = 0; i < localStorage.length; i++){
+
+
+                  if(localStorage.getItem('savedStoryS') !== null){
+
+                    counter--;
+
+                    $('#storyBoard').prepend('<div class="form-group"><center><input id="eulogyBtn" class="btn btn-info"  type="button" value="Eulogy Story ' + counter + '"></center></div>');
+                    retrievedStory = localStorage.getItem('savedStoryS');
+
+
+                  }else if(localStorage.getItem('savedStoryY') !== null){
+
+                    counter--;
+
+                    $('#storyBoard').prepend('<div class="form-group"><center><input id="pirateBtn" class="btn btn-info"  type="button" value="Pirate Story ' + counter + '"></center></div>');
+                    retrievedStory = localStorage.getItem('savedStoryY');
+
+
+                  }else if (localStorage.getItem('savedStoryI') !== null){
+
+                    counter--;
+
+                    $('#storyBoard').prepend('<div class="form-group"><center><input id="dateBtn" class="btn btn-info"  type="button" value="Hot Date Story ' + counter + '"></center></div>');
+                    retrievedStory = localStorage.getItem('savedStoryI');
+
+                  }else{
+
+                    counter--;
+
+                    $('#storyBoard').prepend('<div class="form-group"><center><input id="storyBtn" class="btn btn-info"  type="button" value="Your Story ' + counter + '"></center></div>');
+                    retrievedStory = localStorage.getItem('savedStory2');
+
+                  }
+
+          }
+
+          $('#eulogyBtn').on('click', function(){
+
+            $('#pic1').remove();
+            $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
+
+            $('#storyBoard').append(JSON.parse(retrievedStory));
+
+            $('#eulogyBtn').remove();
+            $('#pirateBtn').remove();
+            $('#saveBtn').remove();
+            $('#dateBtn').remove();
+            $('#storyBtn').remove();
+
+            $("#storyBoard").show();
+
+
+          });
+
+          $('#pirateBtn').on('click', function(){
+
+              $('#pic1').remove();
+              $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
+
+              $('#storyBoard').append(JSON.parse(retrievedStory));
+
+              $('#pirateBtn').remove();
+              $('#saveBtn').remove();
+              $('#dateBtn').remove();
+              $('#storyBtn').remove();
+              $('#eulogyBtn').remove();
+
+              $("#storyBoard").show();
+
+          });
+
+          $('#dateBtn').on('click', function(){
+
+            $('#pic1').remove();
+            $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
+
+            $('#storyBoard').append(JSON.parse(retrievedStory));
+
+            $('#dateBtn').remove();
+            $('#saveBtn').remove();
+            $('#pirateBtn').remove();
+            $('#storyBtn').remove();
+            $('#eulogyBtn').remove();
+
+            $("#storyBoard").show();
+
+
+          });
+
+          $('#storyBtn').on('click', function(){
+
+            $('#pic1').remove();
+            $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
+
+            $('#storyBoard').append(JSON.parse(retrievedStory));
+
+            $('#saveBtn').remove();
+            $('#storyBtn').remove();
+            $('#pirateBtn').remove();
+            $('#dateBtn').remove();
+            $('#eulogyBtn').remove();
+
+            $("#storyBoard").show();
+
+          });
+
 
       }else{ 
 
@@ -278,11 +404,19 @@ window.onload = function(){
                                                       $('#wordForm').hide();
 
                                                       fillInTheBlanks();
-                                                      $('#storyBoard').append('<div class= "form-group"> <center><input id="wordBtn" class="btn btn-danger"  type="button" value="SAVE STORY" ></center></div>');
+                                                      $('#storyBoard').append('<div class= "form-group"> <center><input id="saveBtn" class="btn btn-danger"  type="button" value="SAVE STORY" ></center></div>');
                                                       $("#storyBoard").show();
+                  
+                                                      $('#saveBtn').on('click', function(){
+                                                        $('#saveBtn').remove();
 
-                                                      //localStorage.setObj(key, value)
-                                                      //console.log($("#storyBoard").html());
+                                                            savedStoryLetter = $("#storyBoard").text().charAt(0);
+                                                            savedStory = $("#storyBoard").html();
+
+                                                            localStorage.setItem("savedStory" + savedStoryLetter, JSON.stringify(savedStory));
+                                                            $('#storyBoard').append('<div class= "form-group"><strong><p id="savedMsg" class="text-center">SAVED</p></strong></div>');
+
+                                                      });
                                                   }  
                                             });
                                     }
@@ -293,6 +427,7 @@ window.onload = function(){
 
             }
 };
+
 
 
 //RETURN story selection and send into to numOfBlanks
@@ -360,6 +495,10 @@ function WordCheck(word, wordType, callback) {
             if (!wordType2.includes("noun") && !wordType2.includes("verb") && !wordType2.includes("adjective") && !wordType2.includes("adverb") && !wordType2.includes("pronoun") && !wordType2.includes("conjuction") && !wordType2.includes("preposition") && !wordType2.includes("interjection") && !wordType2.includes("article")){
               
                   callback(true);
+
+            }else if(wordType2.includes("ing")){
+
+                  callback(true);              
 
             }else if (!data[0].partOfSpeech.startsWith(wordType2.substr(0, 3))){
 
