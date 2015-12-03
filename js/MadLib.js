@@ -174,11 +174,11 @@ window.onload = function(){
 
 
           //Run through the BLANKS and REPLACE them with user input
-          for(var i = 0; i <= blankNum; i++){
+          for(var i = 0; i < blankTypes.length; i++){
 
               storyLine = $('#line' + lineNum);
               lineNum++;
-              console.log(blankTypes);
+
               if(storyLine.text().toLowerCase().includes('blank')){
 
                       authorBlank = '<b id="blank'+ counter + '">' + blankTypes[i] + '</b>';
