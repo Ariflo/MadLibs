@@ -182,7 +182,8 @@ window.onload = function(){
               lineNum++;
 
               if(storyLine.text().toLowerCase().includes('blank')){
-
+                      console.log(blankTypes)
+                      console.log(blankTypes[i])
                       authorBlank = '<b id="blank'+ counter + '">' + blankTypes[i] + '</b>';
                       counter++;
 
