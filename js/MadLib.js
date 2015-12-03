@@ -185,7 +185,7 @@ window.onload = function(){
 
                       storyline2 = storyLine.text().toLowerCase().replace('blank', authorBlank);
                       storyLine.html(storyline2);
-                  }else{  i--; }
+                  }
             }
 
           //user INPUT is pushed  in to  the DOM and pasted to the STORYBOARD
