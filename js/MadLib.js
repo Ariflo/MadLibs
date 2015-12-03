@@ -14,6 +14,7 @@
 //MADLIBS Global Varibles set here to be used upon page loading
 var storyWords = [];
 var blankNum = 1;
+var counter3 = 0; 
 var wordCount;
 var example; 
 var word; 
@@ -206,39 +207,39 @@ window.onload = function(){
 
                                     $('#wordForm').fadeOut('slow', function(){ 
 
-                                            example = $("#blank" + lineNum);   
-                                            lineNum++;
+                                                example = $("#blank" + counter3);   
+                                                counter3++;
 
-                                            $('#wordPush').val('');
+                                                $('#wordPush').val('');
 
-                                            $("#headTag").empty();
-                                            example.clone().appendTo($("#headTag"));
+                                                $("#headTag").empty();
+                                                example.clone().appendTo($("#headTag"));
 
-                                            if(storyWords.length < blankTypes.length){
-                                                           
-                                                  $('#wordForm').fadeIn();   
+                                                if(storyWords.length < blankTypes.length){
+                                                               
+                                                      $('#wordForm').fadeIn();   
 
-                                            }else{
+                                                }else{
 
-                                                  $('#pic1').remove();
-                                                  $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
+                                                      $('#pic1').remove();
+                                                      $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
 
-                                                  $('#wordForm').hide();
+                                                      $('#wordForm').hide();
 
-                                                  fillInTheBlanks();
-                                                  $('#storyBoard').append('<div class= "form-group"> <center><input id="saveBtn" class="btn btn-danger"  type="button" value="SAVE STORY" ></center></div>');
-                                                  $("#storyBoard").show();
+                                                      fillInTheBlanks();
+                                                      $('#storyBoard').append('<div class= "form-group"> <center><input id="saveBtn" class="btn btn-danger"  type="button" value="SAVE STORY" ></center></div>');
+                                                      $("#storyBoard").show();
 
-                                                  $('#saveBtn').on('click', function(){
-                                                        $('#saveBtn').remove();
+                                                      $('#saveBtn').on('click', function(){
+                                                            $('#saveBtn').remove();
 
-                                                        savedStory = $("#storyBoard").html();
+                                                            savedStory = $("#storyBoard").html();
 
-                                                        localStorage.setItem("savedStory2", JSON.stringify(savedStory));
-                                                        $('#storyBoard').append('<div class= "form-group"><strong><p id="savedMsg" class="text-center">SAVED</p></strong></div>');
-                                                       });
+                                                            localStorage.setItem("savedStory2", JSON.stringify(savedStory));
+                                                            $('#storyBoard').append('<div class= "form-group"><strong><p id="savedMsg" class="text-center">SAVED</p></strong></div>');
+                                                           });
                                           
-                                                }  
+                                                      }  
                                            });
                                     }
                         });
