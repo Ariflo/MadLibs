@@ -183,11 +183,9 @@ window.onload = function(){
                       authorBlank = '<b id="blank'+ counter + '">' + blankTypes[i] + '</b>';
                       counter++;
 
-                      storyLine2 = storyLine.text().toLowerCase().replace('blank', authorBlank);
-                      storyLine.html(storyLine2);
-              }
-
-          }
+                      storyLine.text().toLowerCase().replace('blank', authorBlank);
+                  }
+            }
 
           //user INPUT is pushed  in to  the DOM and pasted to the STORYBOARD
           $('#wordBtn').on('click', function(evt){
@@ -202,12 +200,13 @@ window.onload = function(){
 
                                  return false; 
 
-                          }else{
+                              }else{
                                     storyWords.push(word);
 
                                     $('#wordForm').fadeOut('slow', function(){ 
 
-                                            example = $("#blank" + storyWords.length);   
+                                            example = $("#blank" + lineNum);   
+                                            lineNum++;
 
                                             $('#wordPush').val('');
 
@@ -236,12 +235,12 @@ window.onload = function(){
 
                                                         localStorage.setItem("savedStory2", JSON.stringify(savedStory));
                                                         $('#storyBoard').append('<div class= "form-group"><strong><p id="savedMsg" class="text-center">SAVED</p></strong></div>');
-                                                  });
+                                                       });
                                           
-                                              }  
-                                        });
-                              }
-                    });
+                                                }  
+                                           });
+                                    }
+                        });
 
               });
 
