@@ -178,7 +178,7 @@ window.onload = function(){
 
               storyLine = $('#line' + lineNum);
               lineNum++;
-
+              console.log(blankTypes);
               if(storyLine.text().toLowerCase().includes('blank')){
 
                       authorBlank = '<b id="blank'+ counter + '">' + blankTypes[i] + '</b>';
@@ -188,8 +188,6 @@ window.onload = function(){
                       storyLine.html(storyline2);
                   }
             }
-
-            console.log(choosenStory.story);
 
           //user INPUT is pushed  in to  the DOM and pasted to the STORYBOARD
           $('#wordBtn').on('click', function(evt){
