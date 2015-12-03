@@ -74,6 +74,7 @@ window.onload = function(){
         var authorInput;
         var authorInput2;
         var counter = 0;
+        var blankCounter = 0; 
 
         //ask user for TITLE input 
         $("#headTag").text('Story Title');
@@ -127,6 +128,7 @@ window.onload = function(){
                 }else{
 
                   blankTypes.push(authorInput);
+                  blankCounter++;
 
                 }
 
@@ -174,7 +176,7 @@ window.onload = function(){
 
 
           //Run through the BLANKS and REPLACE them with user input
-          for(var i = 0; i < blankTypes.length +1; i++){
+          for(var i = 0; i <= blankCounter; i++){
 
               storyLine = $('#line' + lineNum);
               lineNum++;
