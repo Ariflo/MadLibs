@@ -14,7 +14,7 @@
 //MADLIBS Global Varibles set here to be used upon page loading
 var storyWords = [];
 var blankNum = 1;
-var counter3 = 0; 
+var counter3 = 1; 
 var wordCount;
 var example; 
 var word; 
