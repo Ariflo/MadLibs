@@ -183,7 +183,8 @@ window.onload = function(){
                       authorBlank = '<b id="blank'+ counter + '">' + blankTypes[i] + '</b>';
                       counter++;
 
-                      storyLine.text().toLowerCase().replace('blank', authorBlank);
+                      storyline2 = storyLine.text().toLowerCase().replace('blank', authorBlank);
+                      storyLine.html(storyline2);
                   }
             }
 
