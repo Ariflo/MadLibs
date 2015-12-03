@@ -189,6 +189,8 @@ window.onload = function(){
                   }
             }
 
+            console.log(choosenStory.story);
+
           //user INPUT is pushed  in to  the DOM and pasted to the STORYBOARD
           $('#wordBtn').on('click', function(evt){
                     evt.preventDefault();
