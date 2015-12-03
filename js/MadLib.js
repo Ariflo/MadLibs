@@ -174,7 +174,7 @@ window.onload = function(){
 
 
           //Run through the BLANKS and REPLACE them with user input
-          for(var i = 0; i < blankTypes.length; i++){
+          for(var i = 0; i < blankTypes.length +1; i++){
 
               storyLine = $('#line' + lineNum);
               lineNum++;
