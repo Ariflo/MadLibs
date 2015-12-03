@@ -74,7 +74,6 @@ window.onload = function(){
         var authorInput;
         var authorInput2;
         var counter = 0;
-        var blankCounter = 1; 
 
         //ask user for TITLE input 
         $("#headTag").text('Story Title');
@@ -176,18 +175,17 @@ window.onload = function(){
 
 
           //Run through the BLANKS and REPLACE them with user input
-          for(var i = 0; i < blankCounter; i++){
+          for(var i = 0; i < blankNum; i++){
               storyLine = $('#line' + lineNum);
               lineNum++;
 
               if(storyLine.text().toLowerCase().includes('blank')){
-                      console.log(i);
                       authorBlank = '<b id="blank'+ counter + '">' + blankTypes[i] + '</b>';
                       counter++;
 
                       storyline2 = storyLine.text().toLowerCase().replace('blank', authorBlank);
                       storyLine.html(storyline2);
-                  }
+                  }else{  i--; }
             }
 
           //user INPUT is pushed  in to  the DOM and pasted to the STORYBOARD
