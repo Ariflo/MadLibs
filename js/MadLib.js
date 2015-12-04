@@ -14,7 +14,6 @@
 //MADLIBS Global Varibles set here to be used upon page loading
 var storyWords = [];
 var blankNum = 1;
-var counter3 = 1; 
 var wordCount;
 var example; 
 var word; 
@@ -23,7 +22,10 @@ var wordType2;
 var savedStory;
 var savedStory2;
 var savedStoryLetter;
-var retrievedStory;
+var retrievedStory1;
+var retrievedStory2;
+var retrievedStory3;
+var retrievedStory4;
 
 
 window.onload = function(){
@@ -127,7 +129,6 @@ window.onload = function(){
                 }else{
 
                   blankTypes.push(authorInput);
-                  blankCounter++;
 
                 }
 
@@ -175,18 +176,21 @@ window.onload = function(){
 
 
           //Run through the BLANKS and REPLACE them with user input
-          for(var i = 0; i < blankNum; i++){
+          for(var i = 0; i <= blankNum; i++){
+
               storyLine = $('#line' + lineNum);
               lineNum++;
 
               if(storyLine.text().toLowerCase().includes('blank')){
+
                       authorBlank = '<b id="blank'+ counter + '">' + blankTypes[i] + '</b>';
                       counter++;
 
-                      storyline2 = storyLine.text().toLowerCase().replace('blank', authorBlank);
-                      storyLine.html(storyline2);
-                  }
-            }
+                      storyLine2 = storyLine.text().toLowerCase().replace('blank', authorBlank);
+                      storyLine.html(storyLine2);
+              }
+
+          }
 
           //user INPUT is pushed  in to  the DOM and pasted to the STORYBOARD
           $('#wordBtn').on('click', function(evt){
@@ -201,47 +205,46 @@ window.onload = function(){
 
                                  return false; 
 
-                              }else{
+                          }else{
                                     storyWords.push(word);
 
                                     $('#wordForm').fadeOut('slow', function(){ 
 
-                                                example = $("#blank" + counter3);   
-                                                counter3++;
+                                            example = $("#blank" + storyWords.length);   
 
-                                                $('#wordPush').val('');
+                                            $('#wordPush').val('');
 
-                                                $("#headTag").empty();
-                                                example.clone().appendTo($("#headTag"));
+                                            $("#headTag").empty();
+                                            example.clone().appendTo($("#headTag"));
 
-                                                if(storyWords.length < blankTypes.length){
-                                                               
-                                                      $('#wordForm').fadeIn();   
+                                            if(storyWords.length < blankTypes.length){
+                                                           
+                                                  $('#wordForm').fadeIn();   
 
-                                                }else{
+                                            }else{
 
-                                                      $('#pic1').remove();
-                                                      $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
+                                                  $('#pic1').remove();
+                                                  $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
 
-                                                      $('#wordForm').hide();
+                                                  $('#wordForm').hide();
 
-                                                      fillInTheBlanks();
-                                                      $('#storyBoard').append('<div class= "form-group"> <center><input id="saveBtn" class="btn btn-danger"  type="button" value="SAVE STORY" ></center></div>');
-                                                      $("#storyBoard").show();
+                                                  fillInTheBlanks();
+                                                  $('#storyBoard').append('<div class= "form-group"> <center><input id="saveBtn" class="btn btn-danger"  type="button" value="SAVE STORY" ></center></div>');
+                                                  $("#storyBoard").show();
 
-                                                      $('#saveBtn').on('click', function(){
-                                                            $('#saveBtn').remove();
+                                                  $('#saveBtn').on('click', function(){
+                                                        $('#saveBtn').remove();
 
-                                                            savedStory = $("#storyBoard").html();
+                                                        savedStory = $("#storyBoard").html();
 
-                                                            localStorage.setItem("savedStory2", JSON.stringify(savedStory));
-                                                            $('#storyBoard').append('<div class= "form-group"><strong><p id="savedMsg" class="text-center">SAVED</p></strong></div>');
-                                                           });
+                                                        localStorage.setItem("savedStory2", JSON.stringify(savedStory));
+                                                        $('#storyBoard').append('<div class= "form-group"><strong><p id="savedMsg" class="text-center">SAVED</p></strong></div>');
+                                                  });
                                           
-                                                      }  
-                                           });
-                                    }
-                        });
+                                              }  
+                                        });
+                              }
+                    });
 
               });
 
@@ -261,7 +264,7 @@ window.onload = function(){
                     counter2--;
 
                     $('#storyBoard').prepend('<div class="form-group"><center><input id="eulogyBtn" class="btn btn-info"  type="button" value="Eulogy Story ' + counter2 + '"></center></div>');
-                    retrievedStory = localStorage.getItem('savedStoryS');
+                    retrievedStory1 = localStorage.getItem('savedStoryS');
                     localStorage.removeItem('savedStoryS');
 
 
@@ -270,7 +273,7 @@ window.onload = function(){
                     counter2--;
 
                     $('#storyBoard').prepend('<div class="form-group"><center><input id="pirateBtn" class="btn btn-info"  type="button" value="Pirate Story ' + counter2 + '"></center></div>');
-                    retrievedStory = localStorage.getItem('savedStoryY');
+                    retrievedStory2 = localStorage.getItem('savedStoryY');
                     localStorage.removeItem('savedStoryY');
 
                   }else if (localStorage.getItem('savedStoryI') !== null){
@@ -278,7 +281,7 @@ window.onload = function(){
                     counter2--;
 
                     $('#storyBoard').prepend('<div class="form-group"><center><input id="dateBtn" class="btn btn-info"  type="button" value="Hot Date Story ' + counter2 + '"></center></div>');
-                    retrievedStory = localStorage.getItem('savedStoryI');
+                    retrievedStory3 = localStorage.getItem('savedStoryI');
                     localStorage.removeItem('savedStoryI');
 
                   }else{
@@ -286,7 +289,7 @@ window.onload = function(){
                     counter2--;
 
                     $('#storyBoard').prepend('<div class="form-group"><center><input id="storyBtn" class="btn btn-info"  type="button" value="Your Story ' + counter2 + '"></center></div>');
-                    retrievedStory = localStorage.getItem('savedStory2');
+                    retrievedStory4 = localStorage.getItem('savedStory2');
                     localStorage.removeItem('savedStory2');
 
                   }
@@ -298,7 +301,7 @@ window.onload = function(){
             $('#pic1').remove();
             $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
 
-            $('#storyBoard').append(JSON.parse(retrievedStory));
+            $('#storyBoard').append(JSON.parse(retrievedStory1));
 
             $('#eulogyBtn').remove();
             $('#pirateBtn').remove();
@@ -316,7 +319,7 @@ window.onload = function(){
               $('#pic1').remove();
               $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
 
-              $('#storyBoard').append(JSON.parse(retrievedStory));
+              $('#storyBoard').append(JSON.parse(retrievedStory2));
 
               $('#pirateBtn').remove();
               $('#saveBtn').remove();
@@ -333,7 +336,7 @@ window.onload = function(){
             $('#pic1').remove();
             $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
 
-            $('#storyBoard').append(JSON.parse(retrievedStory));
+            $('#storyBoard').append(JSON.parse(retrievedStory3));
 
             $('#dateBtn').remove();
             $('#saveBtn').remove();
@@ -351,7 +354,7 @@ window.onload = function(){
             $('#pic1').remove();
             $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
 
-            $('#storyBoard').append(JSON.parse(retrievedStory));
+            $('#storyBoard').append(JSON.parse(retrievedStory4));
 
             $('#saveBtn').remove();
             $('#storyBtn').remove();
@@ -480,7 +483,7 @@ function numOfBlanks(storyChoice) {
 
 //Call Wordnik api to validate user's input 
 function WordCheck(word, wordType, callback) {
-      var word2 = word.toLowerCase(); 
+      var word2 = word.toLowerCase();
       var dictionaryQueryRequest;
       searchUrl = "http://api.wordnik.com/v4/word.json/" + word2 + "/definitions?api_key=fbe35028dbc86f86f900107cadc072d6b918773fd53e1764b";
 
