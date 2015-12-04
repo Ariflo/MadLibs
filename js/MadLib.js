@@ -22,7 +22,10 @@ var wordType2;
 var savedStory;
 var savedStory2;
 var savedStoryLetter;
-var retrievedStory;
+var retrievedStory1;
+var retrievedStory2;
+var retrievedStory3;
+var retrievedStory4;
 
 
 window.onload = function(){
@@ -261,7 +264,7 @@ window.onload = function(){
                     counter2--;
 
                     $('#storyBoard').prepend('<div class="form-group"><center><input id="eulogyBtn" class="btn btn-info"  type="button" value="Eulogy Story ' + counter2 + '"></center></div>');
-                    retrievedStory = localStorage.getItem('savedStoryS');
+                    retrievedStory1 = localStorage.getItem('savedStoryS');
                     localStorage.removeItem('savedStoryS');
 
 
@@ -270,7 +273,7 @@ window.onload = function(){
                     counter2--;
 
                     $('#storyBoard').prepend('<div class="form-group"><center><input id="pirateBtn" class="btn btn-info"  type="button" value="Pirate Story ' + counter2 + '"></center></div>');
-                    retrievedStory = localStorage.getItem('savedStoryY');
+                    retrievedStory2 = localStorage.getItem('savedStoryY');
                     localStorage.removeItem('savedStoryY');
 
                   }else if (localStorage.getItem('savedStoryI') !== null){
@@ -278,7 +281,7 @@ window.onload = function(){
                     counter2--;
 
                     $('#storyBoard').prepend('<div class="form-group"><center><input id="dateBtn" class="btn btn-info"  type="button" value="Hot Date Story ' + counter2 + '"></center></div>');
-                    retrievedStory = localStorage.getItem('savedStoryI');
+                    retrievedStory3 = localStorage.getItem('savedStoryI');
                     localStorage.removeItem('savedStoryI');
 
                   }else{
@@ -286,7 +289,7 @@ window.onload = function(){
                     counter2--;
 
                     $('#storyBoard').prepend('<div class="form-group"><center><input id="storyBtn" class="btn btn-info"  type="button" value="Your Story ' + counter2 + '"></center></div>');
-                    retrievedStory = localStorage.getItem('savedStory2');
+                    retrievedStory4 = localStorage.getItem('savedStory2');
                     localStorage.removeItem('savedStory2');
 
                   }
@@ -298,7 +301,7 @@ window.onload = function(){
             $('#pic1').remove();
             $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
 
-            $('#storyBoard').append(JSON.parse(retrievedStory));
+            $('#storyBoard').append(JSON.parse(retrievedStory1));
 
             $('#eulogyBtn').remove();
             $('#pirateBtn').remove();
@@ -316,7 +319,7 @@ window.onload = function(){
               $('#pic1').remove();
               $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
 
-              $('#storyBoard').append(JSON.parse(retrievedStory));
+              $('#storyBoard').append(JSON.parse(retrievedStory2));
 
               $('#pirateBtn').remove();
               $('#saveBtn').remove();
@@ -333,7 +336,7 @@ window.onload = function(){
             $('#pic1').remove();
             $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
 
-            $('#storyBoard').append(JSON.parse(retrievedStory));
+            $('#storyBoard').append(JSON.parse(retrievedStory3));
 
             $('#dateBtn').remove();
             $('#saveBtn').remove();
@@ -351,7 +354,7 @@ window.onload = function(){
             $('#pic1').remove();
             $('#page2img').append('<img class="headerPic" src=" images/Story_logo.jpg">');  
 
-            $('#storyBoard').append(JSON.parse(retrievedStory));
+            $('#storyBoard').append(JSON.parse(retrievedStory4));
 
             $('#saveBtn').remove();
             $('#storyBtn').remove();
