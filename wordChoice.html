@@ -24,19 +24,22 @@ www.arianflores.com -->
 
 <body>
 <div id="headDiv"  class="container">
-	<a href="storyChoice.html"><div id="page2img"><img id="pic1" class= "headerPic" src=" images/MadLibs-Logo.png"></div></a>
+	<a href="index.html"><div id="page2img"><img id="pic1" class= "headerPic" src=" images/MadLibs-Logo.png"></div></a>
 
 	<form id="wordForm" class="form-horizontal">
-	<center><label><h3 id="headTag"></h3></label></center>
-		<div id="wordInputField" class= "form-group">
-			<input class="form-control" id="wordPush" type="text" name='word' placeholder="Your word here" required>
-		</div>		
-		<div class= "form-group">
-			<center><input id="submitBtn" class="btn btn-primary"  type="submit" value="SUBMIT" ></center>
+	<center id="headWord"><label><h3 id="headTag"></h3></label></center>
+		<div id="wordInputField" class= "form-group col-xs-7 text-center">
+			<input class="form-control" id="wordPush" type="text" name='word' placeholder="Your word here" autocomplete="off" required>
+			<input id="submitBtn" class="btn btn-primary"  type="submit" value="SUBMIT" >
 		</div>
 	</form>
 
 	<div id="storyBoard"></div>	
 </div>
+<footer id="footer">
+   <div class="row">     
+      <a class="footerNote" href="index.html" target="_self">MadLibs</a><span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span><p class="footerDate" >2016</p>
+   </div>  
+</footer>
 </body>
 </html>
