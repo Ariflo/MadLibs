@@ -93,6 +93,19 @@ www.arianflores.com*/
 	color: red;
 }
 
+#submitBtn{
+	margin-top: 2%;
+}
+
+#wordForm{
+	margin-left: 30%;
+	clear: both;
+}
+
+#headWord{
+	margin-right: 45%;
+}
+
 /*Styled form components*/
 input .btn{
 	margin-left: auto; 
@@ -104,14 +117,37 @@ input{
   	 text-align:center;
 }
 
-label{
-	text-align: center; 
-}
-
 /*Styled story line components*/
 p{
 	display: block;
 	padding-bottom: 10px;
+}
+
+footer{
+   float: both;
+   width:100%;
+   bottom: 0;
+   margin-left: 42%;
+   margin-top: 30%; 
+   font-size: 25px;
+}
+
+.glyphicon{
+  float: left;
+  font-size: 30px;
+  }
+
+.footerNote{
+ float: left;
+ margin-right: 1%;
+ font-family: 'Source Serif Pro', serif;
+ font-weight: 600;
+ color: #000000;
+}
+
+.footerDate{
+  float: left;
+  margin-left: 1%;
 }
 
 
