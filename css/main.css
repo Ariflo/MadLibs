@@ -97,6 +97,20 @@ www.arianflores.com*/
 	margin-top: 2%;
 }
 
+#completeBtn{
+	margin-top: 1%;
+	display: block;
+	clear: both;
+	margin-left: 20%;
+}
+
+#wordBtn{
+	margin-top: 1%;
+	display: block;
+	clear: both;
+	margin-left: 23%;
+}
+
 #wordForm{
 	margin-left: 30%;
 	clear: both;
@@ -148,6 +162,7 @@ footer{
 .footerDate{
   float: left;
   margin-left: 1%;
+  font-weight: 600;
 }
 
 

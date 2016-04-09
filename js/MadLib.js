@@ -80,7 +80,7 @@ window.onload = function(){
         //ask user for TITLE input 
         $("#headTag").text('Story Title');
         $("#wordPush").attr("placeholder", "Your Title Here"); 
-        $('#wordForm').append('<div class= "form-group"> <center><input id="completeBtn" class="btn btn-success"  type="submit" value="Story Complete" ></center></div>');
+        $('#wordForm').append('<div  id="completeBtn"><input class="btn btn-success"  type="submit" value="Story Complete" ></div>');
 
         //ask user for STORY inputs
         $('#submitBtn').on("click", function(evt){
@@ -163,7 +163,7 @@ window.onload = function(){
               $("#headTag").text(title).fadeOut(3000);}, 3000);
           }, 1000); 
 
-          $('#wordForm').append('<div class= "form-group"> <center><input id="wordBtn" class="btn btn-primary"  type="submit" value="SUBMIT" ></center></div>');
+          $('#wordForm').append('<div id="wordBtn"><input class="btn btn-primary"  type="submit" value="SUBMIT" ></div>');
           $('#wordBtn').hide();
 
           setTimeout(function(){
