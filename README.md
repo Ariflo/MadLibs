@@ -1,5 +1,5 @@
 **A project description**<br>
-Mad Libs is a phrasal template word game where one player prompts others for a list of words to substitute for blanks in a story, before reading the – often comical or nonsensical – story aloud. The game is frequently played as a party game or as a pastime.
+[Mad Libs](https://ariflo.github.io/MadLibs) is a phrasal template word game where one player prompts others for a list of words to substitute for blanks in a story, before reading the – often comical or nonsensical – story aloud. The game is frequently played as a party game or as a pastime.
 
 **Who uses it**<br> 
 People who want to read funny stories and laugh at themselves with friends. :)
